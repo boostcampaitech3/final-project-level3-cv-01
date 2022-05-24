@@ -1,6 +1,8 @@
 import React from 'react';
 import LogDetailBox from "./LogDetailBox";
 import Memo from "./Memo";
+import {Link} from "react-router-dom";
+
 
 const LogDetail = () => {
     return (
@@ -13,8 +15,11 @@ const LogDetail = () => {
             <br />
             <Memo title='일지' />
             <br />
-
+            <Link to='/log'>
+                <button>뒤로 가기</button>
+            </Link>
         </div>
+
     );
 }
 
