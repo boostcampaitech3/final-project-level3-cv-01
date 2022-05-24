@@ -1,6 +1,7 @@
 import React from 'react';
 import GrowthInfo from "./GrowthInfo";
 import DamageInfo from "./DamageInfo";
+import {Link} from "react-router-dom";
 
 function CropInfo(props) {
     return (
@@ -8,7 +9,9 @@ function CropInfo(props) {
             <GrowthInfo />
             <br />
             <DamageInfo />
-            <button>작물확인</button>
+            <Link to='/'>
+                <button>작물확인</button>
+            </Link>
         </div>
     );
 }
