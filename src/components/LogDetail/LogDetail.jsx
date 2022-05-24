@@ -14,10 +14,7 @@ const LogDetail = () => {
             <LogDetailBox title='병해충명' content='ㅠㅠ' />
             <br />
             <Memo title='일지' />
-            <br />
-            <Link to='/log'>
-                <button>뒤로 가기</button>
-            </Link>
+
         </div>
 
     );
