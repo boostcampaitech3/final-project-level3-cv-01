@@ -1,6 +1,7 @@
 import React from 'react';
 import StateLog from "./StateLog";
 import {Link} from "react-router-dom";
+import SimpleBottomNavigation from "../Navigator/Navigator";
 
 function Log(props) {
     return (
@@ -10,6 +11,7 @@ function Log(props) {
             <Link to='/'>
                 <button>Home page 이동</button>
             </Link>
+            <SimpleBottomNavigation />
         </div>
 
     );
