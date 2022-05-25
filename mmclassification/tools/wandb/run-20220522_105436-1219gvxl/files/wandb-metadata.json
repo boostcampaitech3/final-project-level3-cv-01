@@ -1,0 +1,26 @@
+{
+    "os": "Linux-4.4.0-210-generic-x86_64-with-glibc2.10",
+    "python": "3.8.5",
+    "heartbeatAt": "2022-05-22T10:54:37.700544",
+    "startedAt": "2022-05-22T10:54:36.407475",
+    "docker": null,
+    "gpu": "Tesla V100-PCIE-32GB",
+    "gpu_count": 1,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [
+        "/opt/ml/input/Project/mmclassification/configs/1.MyConfig/convnext/convnext-xlarge_64xb64_in1k.py"
+    ],
+    "state": "running",
+    "program": "train.py",
+    "codePath": "Project/mmclassification/tools/train.py",
+    "git": {
+        "remote": "https://github.com/boostcampaitech3/level3-product-serving-level3-cv-01.git",
+        "commit": "d57b1609a151ac59cc5400ae92a15c200a2ba7eb"
+    },
+    "email": "pms1139@gmail.com\\n",
+    "root": "/opt/ml/input",
+    "host": "b6c8ccb15fc8",
+    "username": "root",
+    "executable": "/opt/conda/bin/python"
+}
