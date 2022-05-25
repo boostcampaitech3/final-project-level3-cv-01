@@ -1,11 +1,9 @@
 import React from 'react';
 import GrowthInfo from "./GrowthInfo";
 import DamageInfo from "./DamageInfo";
-import {Link} from "react-router-dom";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import LogDetail from "../LogDetail/LogDetail";
 
 const style = {
     position: 'absolute',

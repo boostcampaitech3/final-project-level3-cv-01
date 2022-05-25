@@ -1,7 +1,6 @@
 import React from 'react';
 import LogDetailBox from "./LogDetailBox";
 import Memo from "./Memo";
-import {Link} from "react-router-dom";
 
 
 const LogDetail = () => {
