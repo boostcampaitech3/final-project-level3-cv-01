@@ -18,8 +18,8 @@ export default function SimpleBottomNavigation() {
           setValue(newValue);
         }}
       >
-        <BottomNavigationAction label="Log" icon={<BorderColor />} />
-        <BottomNavigationAction label="Home" icon={<Home />} />
+        <BottomNavigationAction label="Log" icon={<BorderColor />} href='/log' />
+        <BottomNavigationAction label="Home" icon={<Home />} href='/' />
         <BottomNavigationAction label="MyPage" icon={<Person />} />
       </BottomNavigation>
     </Paper>

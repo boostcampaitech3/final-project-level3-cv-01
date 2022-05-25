@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from "react-router-dom";
 import SimpleBottomNavigation from "../Navigator/Navigator";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import Container from '@mui/material/Container';
@@ -195,11 +194,6 @@ const Home = () => {
                             </Container>
                         </Modal>
                     </Box>
-                    {/* 임시로 페이지 이동 버튼 */}
-                    <Link to='/log'>
-                        <button>Log page 이동</button>
-                    </Link>
-
                 </Box>
 
             </Container>
