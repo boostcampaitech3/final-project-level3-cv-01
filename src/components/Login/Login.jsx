@@ -7,8 +7,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-
+import axios from "axios"
+import { useNavigate } from 'react-router';
 const theme = createTheme({
   status: {
     danger: '#064635',
@@ -26,13 +26,42 @@ const theme = createTheme({
 });
 
 export default function Login() {
+  
+  const [id, setId] = React.useState("");
+  const [password, setPassword] = React.useState("")
+
+  const onChangeId = (e) => {
+    setId(e.target.value)
+  }
+  const onChangePassword = (e) => {
+    setPassword(e.target.value)
+  }
+  const navigation = useNavigate()
+  React.useEffect(() => {
+    console.log(localStorage.getItem('isLoggedIn'))
+    if (localStorage.getItem('isLoggedIn') === "true") {
+      navigation('/')
+    }
+  }, [])
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    try {
+      axios.post("http://localhost:8000/api/v1/login", {
+        id: id,
+        password: password,
+      }).then((res) => {
+        if (res.data.Authorization) {
+          localStorage.setItem('isLoggedIn', true)
+          navigation('/')
+        } else {
+          alert("un-authorized")
+        }
+      })
+    } catch {
+      alert("data fetch error")
+    }
   };
 
   return (
@@ -59,6 +88,8 @@ export default function Login() {
               name="id"
               autoComplete="id"
               autoFocus
+
+              onChange={onChangeId}
             />
             <TextField
               margin="normal"
@@ -68,6 +99,7 @@ export default function Login() {
               label="비밀번호를 입력하세요"
               type="password"
               id="password"
+              onChange={onChangePassword}
               autoComplete="current-password"
             />
 
