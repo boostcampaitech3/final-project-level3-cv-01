@@ -31,9 +31,9 @@ async def login(user: user):
     else:
         return {"Authorization" : False}
 
-# @app.get('/api/v1/getDisease')
-# async def get():
-#     response = [{"id": 1, ""}]
-#     return {
-        
-#     }
+@app.get('/api/v1/getDisease')
+async def get():
+    response = [{"id": 1, "image_url": "https://picsum.photos/200", "time_stamp": datetime.date(2022,5,10), "species": "배추", "category": "disease", "kind": "병"}, {"id": 2, "image_url": "https://picsum.photos/300","time_stamp": datetime.date(2022,5,14), "species": "배추", "category": "bug", "kind": "벌레"}]
+    return {
+        "diseases": response
+    }
