@@ -1,1 +1,0 @@
-{"train/loss": 0.3654739204980433, "learning_rate": 0.004995165484649265, "momentum": 0.9, "_timestamp": 1653329388, "_runtime": 2612, "_step": 1924, "val/accuracy_top-1": 36.23762512207031, "val/accuracy_top-5": 91.8246078491211}
