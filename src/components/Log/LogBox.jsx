@@ -30,6 +30,8 @@ const theme = createTheme({
 
 const style = {
     position: 'absolute',
+    alignItems: "center",
+    justifyContent: "center",
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -90,7 +92,7 @@ function LogBox(prop) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    작물 Detection 결과 Image!!!
+                    <img src={prop.imageUrl} alt="결과 이미지"/>
                 </Box>
 
             </Modal>
