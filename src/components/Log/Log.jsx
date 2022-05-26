@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import SimpleBottomNavigation from "../Navigator/Navigator";
 import { Box, Container, Divider, Typography } from "@mui/material";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import 'antd/dist/antd.css'
 import { DatePicker } from 'antd';
 import LogBox from "./LogBox";
-
+import { useNavigate } from 'react-router';
 const onChange = (value, dateString) => {
     console.log('Selected Time: ', value);
     console.log('Formatted Selected Time: ', dateString);
@@ -38,7 +38,12 @@ const theme = createTheme({
 
 
 function Log() {
-
+    const navigation = useNavigate()
+    useEffect(() => {
+        if (localStorage.getItem('isLoggedIn') !== "true") {
+            navigation('/login')
+        }
+    }, [])
     return (
         <ThemeProvider theme={theme}>
 
@@ -68,7 +73,7 @@ function Log() {
                     <LogBox category='bug' date='2022-05-26' kind='벌레'/>
                     {/* Log 기록은 날짜와 category를 변수로 받게 해둠 */}
                     <LogBox category='disease' date='2022-05-26' kind='병'/>
-
+                    <LogBox category='disease' date='2022-05-26' kind='병'/>
                 </Box>
                 <SimpleBottomNavigation/>
             </Container>

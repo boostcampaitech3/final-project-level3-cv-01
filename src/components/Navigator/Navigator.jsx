@@ -20,7 +20,7 @@ export default function SimpleBottomNavigation() {
       >
         <BottomNavigationAction label="Log" icon={<BorderColor />} href='/log' />
         <BottomNavigationAction label="Home" icon={<Home />} href='/' />
-        <BottomNavigationAction label="MyPage" icon={<Person />} />
+        <BottomNavigationAction label="MyPage" icon={<Person />} href='/login'/>
       </BottomNavigation>
     </Paper>
   );

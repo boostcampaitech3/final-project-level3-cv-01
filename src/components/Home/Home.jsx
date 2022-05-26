@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import SimpleBottomNavigation from "../Navigator/Navigator";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import Container from '@mui/material/Container';
@@ -9,7 +9,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
+import { useNavigate } from 'react-router';
 const style = {
     position: 'absolute',
     top: '50%',
@@ -45,6 +45,7 @@ const theme = createTheme({
 
 
 const Home = () => {
+    const navigation = useNavigate()
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -52,6 +53,12 @@ const Home = () => {
     const handleChange = (event) => {
         setCamera(event.target.value);
     };
+
+    useEffect(() => {
+        if (localStorage.getItem('isLoggedIn') !== "true") {
+            navigation('/login')
+        }
+    }, [])
 
 
     return (
