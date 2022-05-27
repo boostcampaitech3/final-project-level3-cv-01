@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import SimpleBottomNavigation from "../Navigator/Navigator";
 import { Box, Container, Divider, Typography } from "@mui/material";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
@@ -6,6 +6,7 @@ import 'antd/dist/antd.css'
 import { DatePicker } from 'antd';
 import LogBox from "./LogBox";
 import { useNavigate } from 'react-router';
+import axios from 'axios';
 const onChange = (value, dateString) => {
     console.log('Selected Time: ', value);
     console.log('Formatted Selected Time: ', dateString);
@@ -38,10 +39,13 @@ const theme = createTheme({
 
 
 function Log() {
+    const [diseases, setDiseases] = useState([])
     const navigation = useNavigate()
     useEffect(() => {
         if (localStorage.getItem('isLoggedIn') !== "true") {
             navigation('/login')
+        } else {
+            axios.get("http://localhost:8000/api/v1/getDisease").then((res) => setDiseases(res.data.diseases))
         }
     }, [])
     return (
@@ -70,10 +74,11 @@ function Log() {
                 </Box>
 
                 <Box>
-                    <LogBox category='bug' date='2022-05-26' kind='벌레'/>
-                    {/* Log 기록은 날짜와 category를 변수로 받게 해둠 */}
-                    <LogBox category='disease' date='2022-05-26' kind='병'/>
-                    <LogBox category='disease' date='2022-05-26' kind='병'/>
+                    {diseases.map((item, idx) => (
+                        <React.Fragment key={idx}>
+                            <LogBox category={item.category} date={item.time_stamp} kind={item.kind} imageUrl={item.image_url}/>
+                        </React.Fragment>
+                    ))}
                 </Box>
                 <SimpleBottomNavigation/>
             </Container>
