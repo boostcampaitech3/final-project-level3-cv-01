@@ -79,6 +79,9 @@ function Log() {
                             <LogBox category={item.category} date={item.time_stamp} kind={item.kind} imageUrl={item.image_url}/>
                         </React.Fragment>
                     ))}
+                    <LogBox category='bug' date='2022-05-26' kind='벌레' />
+                    {/* Log 기록은 날짜와 category를 변수로 받게 해둠 */}
+                    <LogBox category='disease' date='2022-05-26' kind='병' />
                 </Box>
                 <SimpleBottomNavigation/>
             </Container>
