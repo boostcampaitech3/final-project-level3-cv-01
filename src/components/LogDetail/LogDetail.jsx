@@ -1,5 +1,7 @@
 import React from 'react';
-import { Button, FilledInput, Typography, Container } from "@mui/material";
+import {Button, FilledInput, Typography, Container} from "@mui/material";
+import Grid from "@mui/material/Grid";
+import LogDateBox from "../Log/LogDateBox";
 
 
 const LogDetail = (props) => {
@@ -13,33 +15,32 @@ const LogDetail = (props) => {
         console.log(values.memo)
         //    클릭시 일지 저장하는 state Fucntion
     }
+    const [open, setOpen] = React.useState(true);
+
+    const handleClick = () => {
+        setOpen(!open);
+    }
 
     return (
         <Container>
-            <Typography variant="h6" sx={{color: 'text.darker'}}>발생일시</Typography>
-            <FilledInput
-                readOnly={true}
-                fullWidth
-                placeholder={props.date}
-                sx={{color: 'text.darker', marginTop: 1}}
-            />
-            <br/>
+            <LogDateBox date={props.date} handleClick={handleClick} />
+
             <Typography variant="h6" sx={{color: 'text.darker'}}>피해작물</Typography>
             <FilledInput
                 readOnly={true}
                 fullWidth
                 placeholder={props.crop}
-                sx={{color: 'text.darker', marginTop: 1}}
+                sx={{color: 'text.darker', marginTop: 1, marginBottom: 2}}
             />
-            <br/>
+
             <Typography variant="h6" sx={{color: 'text.darker'}}>병해충명</Typography>
             <FilledInput
                 readOnly={true}
                 fullWidth
                 placeholder={props.bug}
-                sx={{color: 'text.darker', marginTop: 1}}
+                sx={{color: 'text.darker', marginTop: 1, marginBottom: 2}}
             />
-            <br/>
+
             <Typography variant="h6" sx={{color: 'text.darker'}}>일지</Typography>
             <FilledInput
                 fullWidth
@@ -48,10 +49,16 @@ const LogDetail = (props) => {
                 multiline
                 value={values.memo}
                 variant="filled"
-                sx={{color: 'text.darker'}}
+                sx={{color: 'text.darker', marginBottom: 2}}
             />
-            <Button onClick={handleClickSave}> 저장 </Button>
-            <Button onClick={props.handleClose}> 닫기 </Button>
+            <Grid container>
+                <Grid item xs>
+                    <Button onClick={handleClickSave} sx={{paddingRight: 5, paddingLeft: 5, color: 'text.white', bgcolor: 'background.primary'}}> 저장 </Button>
+                </Grid>
+                <Grid item>
+                    <Button onClick={props.handleClose} sx={{paddingRight: 5, paddingLeft: 5, color: 'text.white', bgcolor: 'background.primary'}}> 닫기 </Button>
+                </Grid>
+            </Grid>
 
         </Container>
 

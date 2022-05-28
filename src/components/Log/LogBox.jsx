@@ -6,6 +6,7 @@ import {createTheme, ThemeProvider} from "@mui/material/styles";
 import {Grid} from "@mui/material"
 import LogDetail from "../LogDetail/LogDetail";
 import Modal from "@mui/material/Modal";
+import LogDateBox from "./LogDateBox";
 
 const theme = createTheme({
 
@@ -50,6 +51,7 @@ function LogBox(prop) {
 
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false)
+    const [open3, setOpen3] = React.useState(true);
 
     const handleOpen = () => setOpen(true);
     const handleOpen2 = () => setOpen2(true);
@@ -58,6 +60,11 @@ function LogBox(prop) {
     const handleClose2 = () => setOpen2(false);
 
     const categoryType = prop.category;
+
+    const handleCropClick = () => {
+        setOpen3(!open3);
+    }
+
     const buttonBlock = (
         <ButtonGroup variant="outlined" aria-label="outlined button group"
                      sx={{width: '101%', marginLeft: -0.1, marginRight: -0.1}}>
@@ -75,7 +82,7 @@ function LogBox(prop) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <LogDetail date={date2} crop='배추' bug={kind2} handleClose={handleClose}/>
+                    <LogDetail date={date2} crop='배추' bug={kind2} handleClose={handleClose} />
                 </Box>
             </Modal>
 
@@ -92,8 +99,10 @@ function LogBox(prop) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
+                    <LogDateBox date={date2} handleClick={handleCropClick} />
                     <img src={prop.imageUrl} alt="결과 이미지"/>
                 </Box>
+
 
             </Modal>
 
@@ -152,5 +161,6 @@ function LogBox(prop) {
             </ThemeProvider>
         )
     }
-};
+}
+
 export default LogBox;
