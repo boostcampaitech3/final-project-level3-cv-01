@@ -23,7 +23,7 @@ const LogDetail = (props) => {
 
     return (
         <Container>
-            <LogDateBox date={props.date} handleClick={handleClick} />
+            <LogDateBox date={props.date} handleClick={handleClick} datetime={props.datetime} />
 
             <Typography variant="h6" sx={{color: 'text.darker'}}>피해작물</Typography>
             <FilledInput
@@ -38,6 +38,14 @@ const LogDetail = (props) => {
                 readOnly={true}
                 fullWidth
                 placeholder={props.bug}
+                sx={{color: 'text.darker', marginTop: 1, marginBottom: 2}}
+            />
+
+            <Typography variant="h6" sx={{color: 'text.darker'}}>날씨</Typography>
+            <FilledInput
+                readOnly={true}
+                fullWidth
+                placeholder={props.weather}
                 sx={{color: 'text.darker', marginTop: 1, marginBottom: 2}}
             />
 
