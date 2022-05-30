@@ -1,3 +1,4 @@
+from urllib import response
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
@@ -5,6 +6,7 @@ from pydantic import BaseModel
 from typing import List
 import os
 import datetime
+import weather
 
 app = FastAPI()
 
@@ -39,4 +41,12 @@ async def postDisease():
     response = [{"idx": 1, "category": "disease", "date": "2022-05-30", "kind": "병", "datetime": [{'id': '1', 'datetime': '05:26'}], "weather": "흐림", "image_url": "./image2.jpg"}]
     return {
         "diseases": response
+    }
+
+@app.post('/api/v1/postWeather')
+async def postWeather():
+    tw = weather.today_weather(60, 128) # 위치, 경도
+    response = {'date' : tw['date'], 'temperature': tw['temperature'], 'state': tw['state'], 'precipitation': tw['precipitation']}
+    return {
+        "weather": response
     }
