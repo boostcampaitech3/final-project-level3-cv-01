@@ -45,7 +45,7 @@ function Log() {
         if (localStorage.getItem('isLoggedIn') !== "true") {
             navigation('/login')
         } else {
-            axios.get("http://localhost:8000/api/v1/getDisease").then((res) => setDiseases(res.data.diseases))
+            axios.post("http://localhost:8000/api/v1/postDisease").then((res) => setDiseases(res.data.diseases))
         }
     }, [])
     return (
@@ -76,7 +76,7 @@ function Log() {
                 <Box>
                     {diseases.map((item, idx) => (
                         <React.Fragment key={idx}>
-                            <LogBox category={item.category} date={item.time_stamp} kind={item.kind} imageUrl={item.image_url}/>
+                            <LogBox category={item.category} date={item.date} kind={item.kind} imageUrl={item.image_url}/>
                         </React.Fragment>
                     ))}
                     <LogBox category='bug' date='2022-05-26' kind='벌레' />
