@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import SimpleBottomNavigation from "../Navigator/Navigator";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import Container from '@mui/material/Container';
@@ -11,6 +11,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {useNavigate} from 'react-router';
 import LightModeIcon from '@mui/icons-material/LightMode';
+import axios from 'axios';
 
 const style = {
     position: 'absolute',
@@ -47,11 +48,12 @@ const theme = createTheme({
 
 
 const Home = () => {
+    const [weather, setWeather] = useState([])
     const navigation = useNavigate()
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [camera, setCamera] = React.useState('');
+    const [camera, setCamera] = useState('');
     const handleChange = (event) => {
         setCamera(event.target.value);
     };
@@ -59,6 +61,8 @@ const Home = () => {
     useEffect(() => {
         if (localStorage.getItem('isLoggedIn') !== "true") {
             navigation('/login')
+        } else {
+            axios.post("http://localhost:8000/api/v1/postWeather").then((res) => setWeather(res.data.weather))
         }
     }, [])
 
@@ -99,20 +103,21 @@ const Home = () => {
                     >
                         <Stack direction="row" spacing={2}>
                             <Box>
-                                <Stack spacing={2}>
+                                <Stack spacing={2}>             
                                     <Box sx={{textAlign: 'center', alignItems: 'center'}}>
                                         <Typography variant="h6"
-                                                    sx={{color: 'text.darker'}}>2022-05-30
+                                            sx={{color: 'text.darker'}}> {weather.date}
                                         </Typography>
                                     </Box>
                                     <Box sx={{textAlign: 'center', alignItems: 'center'}}>
                                         <Typography variant="h4"
-                                                    sx={{color: 'text.darker'}}>18도
+                                                    sx={{color: 'text.darker'}}> {weather.temperature}
+
                                         </Typography>
                                     </Box>
                                     <Box sx={{textAlign: 'center', alignItems: 'center'}}>
                                         <Typography variant="p"
-                                                    sx={{color: 'text.darker'}}>최저 15도 최고 25도
+                                                    sx={{color: 'text.darker'}}> {weather.precipitation}
                                         </Typography>
                                     </Box>
                                 </Stack>
@@ -127,8 +132,7 @@ const Home = () => {
                                 <LightModeIcon/>
                                 <br/>
                                 <Typography variant="h5"
-                                            sx={{color: 'text.darker'}}>
-                                    맑음
+                                            sx={{color: 'text.darker'}}> {weather.state}
                                 </Typography>
                             </Box>
                         </Stack>
