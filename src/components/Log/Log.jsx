@@ -45,7 +45,7 @@ function Log() {
         id: 1,
         kind: '벌레',
         category: 'bug',
-        date: '2022-05-26',
+        date: '2022-05-16',
         weather: '맑음',
         image_url : '',
         datetime: [{id: 1, datetime: '05:26'}, {id: 2, datetime: '05:37'}]
@@ -96,11 +96,10 @@ function Log() {
                 <Box>
                     {diseases.map((item, idx) => (
                         <React.Fragment key={idx}>
-                            <LogBox category={item.category} date={item.time_stamp} kind={item.kind}
-                                    imageUrl={item.image_url}/>
+                            <LogBox category={item.category} date={item.date} kind={item.kind} datetime={item.datetime}
+                                    weather={item.weather} imageUrl={item.image_url}/>
                         </React.Fragment>
                     ))}
-
                     {logDate.map((log) => (
                         <React.Fragment key={log.id}>
                             <LogBox category={log.category} date={log.date} kind={log.kind} datetime={log.datetime}
