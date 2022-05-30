@@ -7,4 +7,4 @@
 - material UI library v5.8.1
 - material UI library/icons-material v5.8.0
 - antd(Ant Design) UI library v4.20.6
-- axios v0.27.2
+- axios v0.27.
