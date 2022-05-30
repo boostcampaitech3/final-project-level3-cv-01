@@ -1,7 +1,10 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from pydantic import BaseModel
+from typing import List
+import os
+import datetime
 
 app = FastAPI()
 
@@ -31,9 +34,9 @@ async def login(user: user):
     else:
         return {"Authorization" : False}
 
-@app.get('/api/v1/getDisease')
-async def get():
-    response = [{"id": 1, "image_url": "https://picsum.photos/200", "time_stamp": datetime.date(2022,5,10), "species": "배추", "category": "disease", "kind": "병"}, {"id": 2, "image_url": "https://picsum.photos/300","time_stamp": datetime.date(2022,5,14), "species": "배추", "category": "bug", "kind": "벌레"}]
+@app.post('/api/v1/postDisease')
+async def postDisease():
+    response = [{"idx": 1, "category": "disease", "date": "2022-05-30", "kind": "병", "datetime": [{'id': '1', 'datetime': '05:26'}], "weather": "흐림", "image_url": "./image2.jpg"}]
     return {
         "diseases": response
     }
