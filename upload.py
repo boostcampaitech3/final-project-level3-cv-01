@@ -20,11 +20,19 @@ def upload_file(file_name, bucket, object_name=None):
     # Upload the file
     s3_client = boto3.client('s3')
     try:
-        response = s3_client.upload_file(file_name, bucket, object_name)
+        if 'jpg' in file_name:
+            contentType = 'image/jpg'
+        if 'jpeg' in file_name:
+            contentType = 'image/jpeg'
+
+        response = s3_client.upload_file(
+            file_name,
+            bucket,
+            object_name,
+            ExtraArgs={"ContentType": contentType}
+            )
+
     except ClientError as e:
         logging.error(e)
         return False
     return True
-
-if __name__ == "__main__":
-    upload_file('./image', 'smartfarmtv')
