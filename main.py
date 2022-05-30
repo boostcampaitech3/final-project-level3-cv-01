@@ -8,6 +8,7 @@ import datetime
 from upload import *
 from getS3contents import *
 
+
 app = FastAPI()
 
 origins = [
@@ -48,6 +49,7 @@ img_url = get_image_url(tiger)
 @app.post('/api/v1/postDisease')
 async def postDisease():
     response = [{"idx": 1, "category": "disease", "date": date, "kind": "병", "datetime": [{'id': '1', 'datetime': datetime}], "weather": "흐림", "image_url": img_url}]
+
     return {
         "diseases": response
     }
