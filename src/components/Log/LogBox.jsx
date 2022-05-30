@@ -48,6 +48,7 @@ function LogBox(prop) {
 
     const date2 = prop.date
     const kind2 = prop.kind
+    const datetime = prop.datetime
 
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false)
@@ -82,7 +83,7 @@ function LogBox(prop) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <LogDetail date={date2} crop='배추' bug={kind2} handleClose={handleClose} />
+                    <LogDetail date={date2} crop='배추' bug={kind2} handleClose={handleClose} datetime={datetime} weather={prop.weather}/>
                 </Box>
             </Modal>
 
@@ -99,7 +100,7 @@ function LogBox(prop) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <LogDateBox date={date2} handleClick={handleCropClick} />
+                    <LogDateBox date={date2} handleClick={handleCropClick} datetime={datetime}/>
                     <img src={prop.imageUrl} alt="결과 이미지"/>
                 </Box>
 
