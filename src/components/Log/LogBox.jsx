@@ -101,7 +101,7 @@ function LogBox(prop) {
             >
                 <Box sx={style}>
                     <LogDateBox date={date2} handleClick={handleCropClick} datetime={datetime}/>
-                    <img src={prop.imageUrl} alt="결과 이미지"/>
+                    <img src={prop.imageUrl} alt="결과 이미지" style={{maxWidth: '100%'}}/>
                 </Box>
 
 
