@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import SimpleBottomNavigation from "../Navigator/Navigator";
-import { Box, Container, Divider, Typography } from "@mui/material";
+import {Box, Container, Divider, Typography} from "@mui/material";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import 'antd/dist/antd.css'
-import { DatePicker } from 'antd';
+import {DatePicker} from 'antd';
 import LogBox from "./LogBox";
-import { useNavigate } from 'react-router';
+import {useNavigate} from 'react-router';
 import axios from 'axios';
+
 const onChange = (value, dateString) => {
     console.log('Selected Time: ', value);
     console.log('Formatted Selected Time: ', dateString);
@@ -39,6 +40,25 @@ const theme = createTheme({
 
 
 function Log() {
+
+    const logDate = [{
+        id: 1,
+        kind: '벌레',
+        category: 'bug',
+        date: '2022-05-26',
+        weather: '맑음',
+        image_url : '',
+        datetime: [{id: 1, datetime: '05:26'}, {id: 2, datetime: '05:37'}]
+    }, {
+        id: 2,
+        kind: '병',
+        category: 'disease',
+        date: '2022-05-31',
+        weather: '맑음',
+        image_url : '',
+        datetime: [{id: 1, datetime: '08:25', imageUrl: ''}, {id: 2, datetime: '09:45', imageUrl: ''}]
+    }]
+
     const [diseases, setDiseases] = useState([])
     const navigation = useNavigate()
     useEffect(() => {
@@ -76,12 +96,17 @@ function Log() {
                 <Box>
                     {diseases.map((item, idx) => (
                         <React.Fragment key={idx}>
-                            <LogBox category={item.category} date={item.time_stamp} kind={item.kind} imageUrl={item.image_url}/>
+                            <LogBox category={item.category} date={item.time_stamp} kind={item.kind}
+                                    imageUrl={item.image_url}/>
                         </React.Fragment>
                     ))}
-                    <LogBox category='bug' date='2022-05-26' kind='벌레' />
-                    {/* Log 기록은 날짜와 category를 변수로 받게 해둠 */}
-                    <LogBox category='disease' date='2022-05-26' kind='병' />
+
+                    {logDate.map((log) => (
+                        <React.Fragment key={log.id}>
+                            <LogBox category={log.category} date={log.date} kind={log.kind} datetime={log.datetime}
+                                    weather={log.weather} imageUrl={log.image_url}/>
+                        </React.Fragment>
+                    ))}
                 </Box>
                 <SimpleBottomNavigation/>
             </Container>

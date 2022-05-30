@@ -3,13 +3,15 @@ import SimpleBottomNavigation from "../Navigator/Navigator";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
-import {Button, Divider, Modal, Stack} from "@mui/material";
+import {Button, Divider, Modal, Stack, Grid, Typography} from "@mui/material";
 import CachedOutlinedIcon from '@mui/icons-material/CachedOutlined';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useNavigate } from 'react-router';
+import {useNavigate} from 'react-router';
+import LightModeIcon from '@mui/icons-material/LightMode';
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -64,7 +66,7 @@ const Home = () => {
     return (
         <ThemeProvider theme={theme}>
 
-            <Container maxWidth='sm'
+            <Container maxWidth='xs'
                        sx={{alignItems: 'center', bgcolor: 'background.primary'}}>
 
                 <Box sx={{minHeight: 220, color: 'text.white'}}>
@@ -80,7 +82,9 @@ const Home = () => {
                     margin: 0,
                     bgcolor: 'background.paper',
                 }}>
-                    <h3>작물관리</h3>
+                    <Typography variant="h5"
+                                sx={{color: 'text.darker', textAlign: 'center', p: 1}}>작물관리
+                    </Typography>
 
                     <Box
                         sx={{
@@ -93,7 +97,41 @@ const Home = () => {
                             alignItems: 'center'
                         }}
                     >
-                        <p>날씨 정보</p>
+                        <Stack direction="row" spacing={2}>
+                            <Box>
+                                <Stack spacing={2}>
+                                    <Box sx={{textAlign: 'center', alignItems: 'center'}}>
+                                        <Typography variant="h6"
+                                                    sx={{color: 'text.darker'}}>2022-05-30
+                                        </Typography>
+                                    </Box>
+                                    <Box sx={{textAlign: 'center', alignItems: 'center'}}>
+                                        <Typography variant="h4"
+                                                    sx={{color: 'text.darker'}}>18도
+                                        </Typography>
+                                    </Box>
+                                    <Box sx={{textAlign: 'center', alignItems: 'center'}}>
+                                        <Typography variant="p"
+                                                    sx={{color: 'text.darker'}}>최저 15도 최고 25도
+                                        </Typography>
+                                    </Box>
+                                </Stack>
+                            </Box>
+                            <Box sx={{
+                                textAlign: 'center',
+                                alignItems: 'center',
+                                minWidth: 180,
+                                minHeight: 100,
+                                p: 5
+                            }}>
+                                <LightModeIcon/>
+                                <br/>
+                                <Typography variant="h5"
+                                            sx={{color: 'text.darker'}}>
+                                    맑음
+                                </Typography>
+                            </Box>
+                        </Stack>
                         {/*  날씨 API 입력  */}
                     </Box>
 
@@ -114,29 +152,42 @@ const Home = () => {
                     <Box sx={{p: 0.5}}>
                         <Box sx={{width: '100%'}}>
                             <Stack>
-                                <h5>생육단계</h5>
+                                <Typography variant="p"
+                                            sx={{color: 'text.darker', p: 1}}>생육단계
+                                </Typography>
                                 <Box>
-                                    <Stack direction="row" spacing={2} sx={{bgcolor: '#F2F2F2', borderRadius: 3, p: 2}}>
+                                    <Stack direction="row" spacing={2}
+                                           sx={{bgcolor: '#F2F2F2', borderRadius: 3, p: 1.5}}>
                                         <Box>
-                                            <h4>생육단계</h4>
+                                            <Typography variant="h8"
+                                                        sx={{color: 'text.darker'}}>생육단계
+                                            </Typography>
                                         </Box>
                                         <Box sx={{textAlign: 'center'}}>
-                                            <p>Description</p>
+                                            <Typography variant="p"
+                                                        sx={{color: 'text.darker'}}>Description
+                                            </Typography>
                                         </Box>
                                     </Stack>
                                 </Box>
-                                <p>피해발생 정보</p>
+                                <Typography variant="p"
+                                            sx={{color: 'text.darker', p: 1}}>피해발생 정보
+                                </Typography>
                                 <Box>
                                     <Stack direction="row" spacing={2} sx={{bgcolor: '#F2F2F2', borderRadius: 3, p: 2}}>
                                         <Box>
-                                            <h4>해충</h4>
+                                            <Typography variant="h8"
+                                                        sx={{color: 'text.darker'}}>해충
+                                            </Typography>
                                         </Box>
                                         <Box>
-                                            <p>Description</p>
+                                            <Typography variant="p"
+                                                        sx={{color: 'text.darker'}}>Description
+                                            </Typography>
                                         </Box>
                                     </Stack>
                                 </Box>
-                                <Button variant='contained' color='button_color' sx={{minWidth: 500, p: 1}}
+                                <Button variant='contained' color='button_color' sx={{p: 1}}
                                         onClick={handleOpen}>실시간 작물 확인</Button>
                             </Stack>
 

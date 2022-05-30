@@ -7,12 +7,15 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import Collapse from "@mui/material/Collapse";
 import List from "@mui/material/List";
 
+
 function LogDateBox(props) {
     const [open, setOpen] = React.useState(true);
 
     const handleClick = () => {
         setOpen(!open);
     }
+
+
     return (
         <Box>
             <Typography variant="h6" sx={{color: 'text.darker'}}>발생일시</Typography>
@@ -22,9 +25,11 @@ function LogDateBox(props) {
             </ListItemButton>
             <Collapse in={!open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    <ListItemButton sx={{pl: 4}}>
-                        <ListItemText primary='05:26'/>
-                    </ListItemButton>
+                    {props.datetime.map((dt) =>
+                        <ListItemButton sx={{pl: 4}} key={dt.id}>
+                            <ListItemText primary={dt.datetime}/>
+                        </ListItemButton>
+                    )}
                 </List>
             </Collapse>
         </Box>
