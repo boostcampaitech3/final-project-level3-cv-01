@@ -5,7 +5,7 @@ import datetime
 
 
 def today_weather(base_date, lat, lng):
-    url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"
+    url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?"
     service_key = "kK+hUecCXInxgNTPSHW+P132fAuWPScRIujCRBLQQJ9w1J3S+sHfNBxM+DbgdE36m2pj6hS+kSkzGPBRKwghJg=="
 
     today = datetime.datetime.today()
