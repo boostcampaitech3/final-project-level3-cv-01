@@ -1,4 +1,7 @@
-*.idea
-__pycache__/main.cpython-38.pyc
 fe
-image.jpg
+*.idea
+*.pyc
+*.jpg
+*.jpeg
+*.png
+*.txt

@@ -4,29 +4,45 @@ import json
 import datetime
 
 
-def today_weather(nx, ny):
-    vilage_weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?"
-
-    service_key = "kK%2BhUecCXInxgNTPSHW%2BP132fAuWPScRIujCRBLQQJ9w1J3S%2BsHfNBxM%2BDbgdE36m2pj6hS%2BkSkzGPBRKwghJg%3D%3D"
+def today_weather(base_date, lat, lng):
+    url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"
+    service_key = "kK+hUecCXInxgNTPSHW+P132fAuWPScRIujCRBLQQJ9w1J3S+sHfNBxM+DbgdE36m2pj6hS+kSkzGPBRKwghJg=="
 
     today = datetime.datetime.today()
-    base_date = "20220530"
-    # base_date = today.strftime("%Y%m%d") # 날짜
-    base_time = "0800" # 날씨 값
 
-    payload = "serviceKey=" + service_key + "&" +\
-        "dataType=json" + "&" +\
-        "base_date=" + base_date + "&" +\
-        "base_time=" + base_time + "&" +\
-        "nx=" + str(nx) + "&" +\
-        "ny=" + str(ny)
+    # base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300
+    if int(today.strftime("%H%M")) < int("0500"): 
+        base_time = "0200" 
+    elif int(today.strftime("%H%M")) >= int("0500") and int(today.strftime("%H%M")) < int("0800"):
+        base_time = "0500" 
+    elif int(today.strftime("%H%M")) >= int("0800") and int(today.strftime("%H%M")) < int("1100"):
+        base_time = "0800" 
+    elif int(today.strftime("%H%M")) >= int("1100") and int(today.strftime("%H%M")) < int("1400"):
+        base_time = "1100" 
+    elif int(today.strftime("%H%M")) >= int("1400") and int(today.strftime("%H%M")) < int("1700"):
+        base_time = "1400" 
+    elif int(today.strftime("%H%M")) >= int("1700") and int(today.strftime("%H%M")) < int("2000"): 
+        base_time = "1700" 
+    elif int(today.strftime("%H%M")) >= int("2000") and int(today.strftime("%H%M")) < int("2300"): 
+        base_time = "2000" 
+    else:
+        base_time = "2300"
+        
+    params ={
+        'serviceKey' : service_key,
+        'dataType' : 'json',
+        'base_date' : base_date,
+        'base_time' : base_time,
+        'nx' : lat,
+        'ny' : lng 
+        }
 
     # 값 요청
-    res = requests.get(vilage_weather_url + payload)
+    res = requests.get(url, params=params)
     items = res.json().get('response').get('body').get('items')
 
     weather_data = dict()
-    weather_data['date'] = today.strftime("%Y-%m-%d")
+    weather_data['date'] = base_date
     for item in items['item']:
         # 강수형태
         if item['category'] == 'PTY':
@@ -56,5 +72,5 @@ def today_weather(nx, ny):
         
     return weather_data 
 
-# print(today_climate(60, 120))
+# print(today_weather("20220531", 60, 128))
 # {'temperature': '20', 'state': '맑음', 'precipitation': '0'} 20도 맑음 강수량 0 
