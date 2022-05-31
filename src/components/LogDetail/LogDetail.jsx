@@ -2,17 +2,26 @@ import React from 'react';
 import {Button, FilledInput, Typography, Container} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import LogDateBox from "../Log/LogDateBox";
+import axios from 'axios';
 
 
 const LogDetail = (props) => {
+    console.log(props.datetime, '@')
     const [values, setValues] = React.useState({
-        memo: '',
+        crop: props.crop,
+        bug: props.bug,
+        weather: props.weather[0],
+        memo: ''
     });
     const handleChange = (prop) => (event) => {
         setValues({...values, [prop]: event.target.value});
     };
     const handleClickSave = () => {
-        console.log(values.memo)
+        axios.post('http://127.0.0.1:8000/api/v1/postMemo', {idx: props.idx, crop: props.crop, bug: props.bug, weather: props.weather[0], memo: values.memo, datetime: props.datetime[0]})
+        // console.log(props.crop)
+        // console.log(props.bug)
+        // console.log(props.weather[0])
+        // console.log(values.memo)
         //    클릭시 일지 저장하는 state Fucntion
     }
     const [open, setOpen] = React.useState(true);
@@ -45,7 +54,7 @@ const LogDetail = (props) => {
             <FilledInput
                 readOnly={true}
                 fullWidth
-                placeholder={`${props.weather.state} / 강수량 - ${props.weather.precipitation}mm`}
+                placeholder={`${props.weather[0].state} / 강수량 - ${props.weather[0].precipitation}mm`}
                 sx={{color: 'text.darker', marginTop: 1, marginBottom: 2}}
             />
 
