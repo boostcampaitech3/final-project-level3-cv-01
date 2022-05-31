@@ -143,18 +143,18 @@ const Home = () => {
                                 <Stack spacing={2}>
                                     <Box sx={{textAlign: 'center', alignItems: 'center'}}>
                                         <Typography variant="h6"
-                                                    sx={{color: 'text.darker'}}> {weather.date} 2022-05-31
+                                                    sx={{color: 'text.darker'}}> {weather.date}
                                         </Typography>
                                     </Box>
                                     <Box sx={{textAlign: 'center', alignItems: 'center'}}>
                                         <Typography variant="h4"
-                                                    sx={{color: 'text.darker'}}> {weather.temperature} 14℃
+                                                    sx={{color: 'text.darker'}}> {weather.temperature}℃
 
                                         </Typography>
                                     </Box>
                                     <Box sx={{textAlign: 'center', alignItems: 'center'}}>
                                         <Typography variant="h6"
-                                                    sx={{color: 'text.darker'}}> {weather.precipitation}10mm
+                                                    sx={{color: 'text.darker'}}> {weather.precipitation}mm
                                         </Typography>
                                     </Box>
                                 </Stack>
@@ -173,9 +173,6 @@ const Home = () => {
                                       sx={{margin:0.5}}
                                 />
                                 <br/>
-                                <Typography variant="h5"
-                                            sx={{color: 'text.darker'}}> {weather.state} 맑음
-                                </Typography>
                                 <Typography variant="h5"
                                             sx={{color: 'text.darker'}}> {weather.state}
                                 </Typography>

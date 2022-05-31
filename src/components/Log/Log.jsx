@@ -41,23 +41,23 @@ const theme = createTheme({
 
 function Log() {
 
-    const logDate = [{
-        id: 1,
-        kind: '벌레',
-        category: 'bug',
-        date: '2022-05-16',
-        weather: {state: '맑음', precipitation: '0'},
-        image_url : '0001.jpg',
-        datetime: [{id: 1, datetime: '05:26'}, {id: 2, datetime: '05:37'}]
-    }, {
-        id: 2,
-        kind: '병',
-        category: 'disease',
-        date: '2022-05-31',
-        weather: {state: '맑음', precipitation: '0'},
-        image_url : './0001.jpg',
-        datetime: [{id: 1, datetime: '08:25'}, {id: 2, datetime: '09:45'}]
-    }]
+    // const logDate = [{
+    //     id: 1,
+    //     kind: '벌레',
+    //     category: 'bug',
+    //     date: '2022-05-16',
+    //     weather: {state: '맑음', precipitation: '0'},
+    //     image_url : '0001.jpg',
+    //     datetime: [{id: 1, datetime: '05:26'}, {id: 2, datetime: '05:37'}]
+    // }, {
+    //     id: 2,
+    //     kind: '병',
+    //     category: 'disease',
+    //     date: '2022-05-31',
+    //     weather: {state: '맑음', precipitation: '0'},
+    //     image_url : './0001.jpg',
+    //     datetime: [{id: 1, datetime: '08:25'}, {id: 2, datetime: '09:45'}]
+    // }]
 
     const [diseases, setDiseases] = useState([])
     const navigation = useNavigate()
@@ -68,6 +68,10 @@ function Log() {
             axios.post("http://localhost:8000/api/v1/postDisease").then((res) => setDiseases(res.data.diseases))
         }
     }, [])
+
+    useEffect(() => {
+        console.log(diseases)
+    }, [diseases])
     return (
         <ThemeProvider theme={theme}>
 
@@ -97,15 +101,15 @@ function Log() {
                     {diseases.map((item, idx) => (
                         <React.Fragment key={idx}>
                             <LogBox category={item.category} date={item.date} kind={item.kind} datetime={item.datetime}
-                                    weather={item.weather} imageUrl={item.image_url}/>
+                                    weather={item.weather} imageUrl={item.image_url} idx={item.idx}/>
                         </React.Fragment>
                     ))}
-                    {logDate.map((log) => (
+                    {/* {logDate.map((log) => (
                         <React.Fragment key={log.id}>
                             <LogBox category={log.category} date={log.date} kind={log.kind} datetime={log.datetime}
                                     weather={log.weather} imageUrl={log.image_url} />
                         </React.Fragment>
-                    ))}
+                    ))} */}
                 </Box>
                 <SimpleBottomNavigation/>
             </Container>
