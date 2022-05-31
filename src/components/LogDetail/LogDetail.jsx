@@ -2,16 +2,23 @@ import React from 'react';
 import {Button, FilledInput, Typography, Container} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import LogDateBox from "../Log/LogDateBox";
+import axios from 'axios';
 
 
 const LogDetail = (props) => {
     const [values, setValues] = React.useState({
-        memo: '',
+        crop: props.crop,
+        bug: props.bug,
+        weather: props.weather,
+        memo: ''
     });
     const handleChange = (prop) => (event) => {
         setValues({...values, [prop]: event.target.value});
     };
     const handleClickSave = () => {
+        console.log(props.crop)
+        console.log(props.bug)
+        console.log(props.weather)
         console.log(values.memo)
         //    클릭시 일지 저장하는 state Fucntion
     }
