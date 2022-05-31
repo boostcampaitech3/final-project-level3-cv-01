@@ -3,15 +3,18 @@ import SimpleBottomNavigation from "../Navigator/Navigator";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
-import {Button, Divider, Modal, Stack, Grid, Typography} from "@mui/material";
+import {Button, Divider, Modal, Stack, Typography} from "@mui/material";
 import CachedOutlinedIcon from '@mui/icons-material/CachedOutlined';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {useNavigate} from 'react-router';
-import LightModeIcon from '@mui/icons-material/LightMode';
+import Logo from './logo.png'
 import axios from 'axios';
+
+import {mdiWeatherSnowyRainy, mdiWeatherPouring, mdiWeatherSnowyHeavy, mdiWeatherRainy, mdiWhiteBalanceSunny } from '@mdi/js';
+import Icon from '@mdi/react'
 
 const style = {
     position: 'absolute',
@@ -32,7 +35,8 @@ const theme = createTheme({
     palette: {
         background: {
             main: '#fff',
-            primary: '#064635'
+            primary: '#064635',
+            logo: '#274437'
         },
         text: {
             primary: '#064635',
@@ -65,16 +69,49 @@ const Home = () => {
             axios.post("http://localhost:8000/api/v1/postWeather").then((res) => setWeather(res.data.weather))
         }
     }, [])
+    const weatherBox = (prop) => {
+        if (prop.state === '비') {
+            <Icon path={mdiWeatherRainy}
+                  title="비"
+                  size={3}
+                  sx={{margin:0.5}}
+            />
+        } else if (prop.state === '비/눈') {
+            <Icon path={mdiWeatherSnowyRainy}
+                  title="비/눈"
+                  size={3}
+                  sx={{margin:0.5}}
+            />
+        } else if (prop.state === '눈') {
+            <Icon path={mdiWeatherSnowyHeavy}
+                  title="눈"
+                  size={3}
+                  sx={{margin:0.5}}
+            />
+        } else if (prop.state === '소나기') {
+            <Icon path={mdiWeatherPouring}
+                  title="소나기"
+                  size={3}
+                  sx={{margin:0.5}}
+            />
+        } else {
+            <Icon path={ mdiWhiteBalanceSunny }
+                  title="맑음"
+                  size={3}
+                  sx={{margin:0.5}}
+            />
+        }
+    }
 
 
     return (
         <ThemeProvider theme={theme}>
 
             <Container maxWidth='xs'
-                       sx={{alignItems: 'center', bgcolor: 'background.primary'}}>
+                       sx={{alignItems: 'center', bgcolor: 'background.logo', minHeight: '100%', minWidth: '100%'}}>
 
-                <Box sx={{minHeight: 220, color: 'text.white'}}>
-                    Logo
+                <Box sx={{color: 'text.white', minHeight: '100%', minWidth: '100%', alignItems: 'center',  p : '5%'}}>
+                    <img src={Logo} />
                     {/*    Logo 삽입 예정*/}
                 </Box>
 
@@ -101,36 +138,44 @@ const Home = () => {
                             alignItems: 'center'
                         }}
                     >
-                        <Stack direction="row" spacing={2}>
+                        <Stack direction="row" spacing={1}>
                             <Box>
-                                <Stack spacing={2}>             
+                                <Stack spacing={2}>
                                     <Box sx={{textAlign: 'center', alignItems: 'center'}}>
                                         <Typography variant="h6"
-                                            sx={{color: 'text.darker'}}> {weather.date}
+                                                    sx={{color: 'text.darker'}}> {weather.date} 2022-05-31
                                         </Typography>
                                     </Box>
                                     <Box sx={{textAlign: 'center', alignItems: 'center'}}>
                                         <Typography variant="h4"
-                                                    sx={{color: 'text.darker'}}> {weather.temperature}
+                                                    sx={{color: 'text.darker'}}> {weather.temperature} 14℃
 
                                         </Typography>
                                     </Box>
                                     <Box sx={{textAlign: 'center', alignItems: 'center'}}>
-                                        <Typography variant="p"
-                                                    sx={{color: 'text.darker'}}> {weather.precipitation}
+                                        <Typography variant="h6"
+                                                    sx={{color: 'text.darker'}}> {weather.precipitation}10mm
                                         </Typography>
                                     </Box>
                                 </Stack>
                             </Box>
+
                             <Box sx={{
                                 textAlign: 'center',
                                 alignItems: 'center',
                                 minWidth: 180,
-                                minHeight: 100,
-                                p: 5
+                                p: 2
                             }}>
-                                <LightModeIcon/>
+                                {weatherBox(weather)}
+                                <Icon path={mdiWhiteBalanceSunny}
+                                      title="맑음"
+                                      size={3}
+                                      sx={{margin:0.5}}
+                                />
                                 <br/>
+                                <Typography variant="h5"
+                                            sx={{color: 'text.darker'}}> {weather.state} 맑음
+                                </Typography>
                                 <Typography variant="h5"
                                             sx={{color: 'text.darker'}}> {weather.state}
                                 </Typography>
@@ -157,34 +202,31 @@ const Home = () => {
                         <Box sx={{width: '100%'}}>
                             <Stack>
                                 <Typography variant="p"
-                                            sx={{color: 'text.darker', p: 1}}>생육단계
-                                </Typography>
-                                <Box>
-                                    <Stack direction="row" spacing={2}
-                                           sx={{bgcolor: '#F2F2F2', borderRadius: 3, p: 1.5}}>
-                                        <Box>
-                                            <Typography variant="h8"
-                                                        sx={{color: 'text.darker'}}>생육단계
-                                            </Typography>
-                                        </Box>
-                                        <Box sx={{textAlign: 'center'}}>
-                                            <Typography variant="p"
-                                                        sx={{color: 'text.darker'}}>Description
-                                            </Typography>
-                                        </Box>
-                                    </Stack>
-                                </Box>
-                                <Typography variant="p"
                                             sx={{color: 'text.darker', p: 1}}>피해발생 정보
                                 </Typography>
                                 <Box>
-                                    <Stack direction="row" spacing={2} sx={{bgcolor: '#F2F2F2', borderRadius: 3, p: 2}}>
+                                    <Stack direction="row" spacing={2} sx={{bgcolor: '#F2F2F2', borderTopLeftRadius: 6, borderTopRightRadius: 6, p: 1.5}}>
                                         <Box>
                                             <Typography variant="h8"
                                                         sx={{color: 'text.darker'}}>해충
                                             </Typography>
                                         </Box>
                                         <Box>
+                                            <Typography variant="p"
+                                                        sx={{color: 'text.darker'}}>Description
+                                            </Typography>
+                                        </Box>
+                                    </Stack>
+                                </Box>
+                                <Box>
+                                    <Stack direction="row" spacing={2}
+                                           sx={{bgcolor: '#F2F2F2', borderBottomRightRadius: 6, borderBottomLeftRadius: 6, p: 1.5}}>
+                                        <Box>
+                                            <Typography variant="h8"
+                                                        sx={{color: 'text.darker'}}>질병
+                                            </Typography>
+                                        </Box>
+                                        <Box sx={{textAlign: 'center'}}>
                                             <Typography variant="p"
                                                         sx={{color: 'text.darker'}}>Description
                                             </Typography>

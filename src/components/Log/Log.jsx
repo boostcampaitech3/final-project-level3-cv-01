@@ -46,17 +46,17 @@ function Log() {
         kind: '벌레',
         category: 'bug',
         date: '2022-05-16',
-        weather: '맑음',
-        image_url : '',
+        weather: {state: '맑음', precipitation: '0'},
+        image_url : '0001.jpg',
         datetime: [{id: 1, datetime: '05:26'}, {id: 2, datetime: '05:37'}]
     }, {
         id: 2,
         kind: '병',
         category: 'disease',
         date: '2022-05-31',
-        weather: '맑음',
-        image_url : '',
-        datetime: [{id: 1, datetime: '08:25', imageUrl: ''}, {id: 2, datetime: '09:45', imageUrl: ''}]
+        weather: {state: '맑음', precipitation: '0'},
+        image_url : './0001.jpg',
+        datetime: [{id: 1, datetime: '08:25'}, {id: 2, datetime: '09:45'}]
     }]
 
     const [diseases, setDiseases] = useState([])
@@ -71,8 +71,8 @@ function Log() {
     return (
         <ThemeProvider theme={theme}>
 
-            <Container maxWidth='xs' sx={{bgcolor: 'background.main', marginTop: 2}}>
-
+            <Container maxWidth='xs' sx={{bgcolor: 'background.main'}}>
+                <br />
                 <Box>
                     <Typography variant="h5" sx={{color: 'text.primary'}}>피해발생 기록</Typography>
                 </Box>
@@ -103,7 +103,7 @@ function Log() {
                     {logDate.map((log) => (
                         <React.Fragment key={log.id}>
                             <LogBox category={log.category} date={log.date} kind={log.kind} datetime={log.datetime}
-                                    weather={log.weather} imageUrl={log.image_url}/>
+                                    weather={log.weather} imageUrl={log.image_url} />
                         </React.Fragment>
                     ))}
                 </Box>
