@@ -38,19 +38,18 @@ async def login(user: user):
     else:
         return {"Authorization" : False}
 
-
 # 테스트 부분
 upload_file('./호랑이.jpeg', 'smartfarmtv')
 objects_list = make_objects_list('smartfarmtv')
 tiger = make_object('smartfarmtv', objects_list[-1])
-date, datetime = get_image_date(tiger)
+date, input_datetime = get_image_date(tiger)
 img_url = get_image_url(tiger)
 
-tw = weather.today_weather("20220531", 60, 120)  # 위치, 경도
+tw = weather.today_weather(date, input_datetime, 60, 120)  # 날짜, 시간, 위치, 경도
 
 @app.post('/api/v1/postDisease')
 async def postDisease():
-    response = [{"idx": 1, "category": "disease", "date": date, "kind": "병", "datetime": [{'id': '1', 'datetime': datetime}], "weather": tw['state'], "image_url": img_url}]
+    response = [{"idx": 1, "category": "disease", "date": date, "kind": "병", "datetime": [{'id': '1', 'datetime': input_datetime}], "weather": tw['state'], "image_url": img_url}]
     return {
         "diseases": response
     }

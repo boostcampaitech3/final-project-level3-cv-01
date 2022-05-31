@@ -4,30 +4,31 @@ import json
 import datetime
 
 
-def today_weather(base_date, lat, lng):
+def today_weather(date, input_datetime, lat, lng):
     url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?"
     service_key = "kK+hUecCXInxgNTPSHW+P132fAuWPScRIujCRBLQQJ9w1J3S+sHfNBxM+DbgdE36m2pj6hS+kSkzGPBRKwghJg=="
 
-    today = datetime.datetime.today()
+    base_date = ''.join(date.split('-'))
+    base_time = ''.join(input_datetime.split(':'))
 
     # base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300
-    if int(today.strftime("%H%M")) < int("0500"): 
+    if int(base_time) < int("0500"): 
         base_time = "0200" 
-    elif int(today.strftime("%H%M")) >= int("0500") and int(today.strftime("%H%M")) < int("0800"):
+    elif int(base_time) >= int("0500") and int(base_time) < int("0800"):
         base_time = "0500" 
-    elif int(today.strftime("%H%M")) >= int("0800") and int(today.strftime("%H%M")) < int("1100"):
+    elif int(base_time) >= int("0800") and int(base_time) < int("1100"):
         base_time = "0800" 
-    elif int(today.strftime("%H%M")) >= int("1100") and int(today.strftime("%H%M")) < int("1400"):
+    elif int(base_time) >= int("1100") and int(base_time) < int("1400"):
         base_time = "1100" 
-    elif int(today.strftime("%H%M")) >= int("1400") and int(today.strftime("%H%M")) < int("1700"):
+    elif int(base_time) >= int("1400") and int(base_time) < int("1700"):
         base_time = "1400" 
-    elif int(today.strftime("%H%M")) >= int("1700") and int(today.strftime("%H%M")) < int("2000"): 
+    elif int(base_time) >= int("1700") and int(base_time) < int("2000"): 
         base_time = "1700" 
-    elif int(today.strftime("%H%M")) >= int("2000") and int(today.strftime("%H%M")) < int("2300"): 
+    elif int(base_time) >= int("2000") and int(base_time) < int("2300"): 
         base_time = "2000" 
     else:
         base_time = "2300"
-        
+
     params ={
         'serviceKey' : service_key,
         'dataType' : 'json',
@@ -42,7 +43,7 @@ def today_weather(base_date, lat, lng):
     items = res.json().get('response').get('body').get('items')
 
     weather_data = dict()
-    weather_data['date'] = base_date
+    weather_data['date'] = date
     for item in items['item']:
         # 강수형태
         if item['category'] == 'PTY':
