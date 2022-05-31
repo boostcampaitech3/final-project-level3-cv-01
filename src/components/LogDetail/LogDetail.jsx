@@ -45,7 +45,7 @@ const LogDetail = (props) => {
             <FilledInput
                 readOnly={true}
                 fullWidth
-                placeholder={props.weather}
+                placeholder={`${props.weather.state} / 강수량 - ${props.weather.precipitation}mm`}
                 sx={{color: 'text.darker', marginTop: 1, marginBottom: 2}}
             />
 
