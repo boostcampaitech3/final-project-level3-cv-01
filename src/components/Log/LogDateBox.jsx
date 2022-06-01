@@ -25,11 +25,11 @@ function LogDateBox(props) {
             </ListItemButton>
             <Collapse in={!open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    {props.datetime.map((dt) =>
-                        <ListItemButton sx={{pl: 4}} key={dt.id}>
-                            <ListItemText primary={dt.datetime}/>
-                        </ListItemButton>
-                    )}
+                    {/* {props.datetime.map((dt) => */}
+                    <ListItemButton sx={{pl: 4}}>
+                        <ListItemText primary={props.datetime}/>
+                    </ListItemButton>
+                    {/* )} */}
                 </List>
             </Collapse>
         </Box>

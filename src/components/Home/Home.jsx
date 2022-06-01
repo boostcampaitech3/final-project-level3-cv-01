@@ -61,7 +61,6 @@ const Home = () => {
     const handleChange = (event) => {
         setCamera(event.target.value);
     };
-
     useEffect(() => {
         if (localStorage.getItem('isLoggedIn') !== "true") {
             navigation('/login')
@@ -102,8 +101,6 @@ const Home = () => {
             />
         }
     }
-
-
     return (
         <ThemeProvider theme={theme}>
 

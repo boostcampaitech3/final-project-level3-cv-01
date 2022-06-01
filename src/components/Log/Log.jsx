@@ -40,25 +40,6 @@ const theme = createTheme({
 
 
 function Log() {
-
-    // const logDate = [{
-    //     id: 1,
-    //     kind: '벌레',
-    //     category: 'bug',
-    //     date: '2022-05-16',
-    //     weather: {state: '맑음', precipitation: '0'},
-    //     image_url : '0001.jpg',
-    //     datetime: [{id: 1, datetime: '05:26'}, {id: 2, datetime: '05:37'}]
-    // }, {
-    //     id: 2,
-    //     kind: '병',
-    //     category: 'disease',
-    //     date: '2022-05-31',
-    //     weather: {state: '맑음', precipitation: '0'},
-    //     image_url : './0001.jpg',
-    //     datetime: [{id: 1, datetime: '08:25'}, {id: 2, datetime: '09:45'}]
-    // }]
-
     const [diseases, setDiseases] = useState([])
     const navigation = useNavigate()
     useEffect(() => {
@@ -68,10 +49,9 @@ function Log() {
             axios.post("http://localhost:8000/api/v1/postDisease").then((res) => setDiseases(res.data.diseases))
         }
     }, [])
-
-    useEffect(() => {
-        console.log(diseases)
-    }, [diseases])
+    // useEffect(() => {
+    //     console.log(diseases)
+    // }, [diseases])
     return (
         <ThemeProvider theme={theme}>
 
@@ -98,10 +78,14 @@ function Log() {
                 </Box>
 
                 <Box>
-                    {diseases.map((item, idx) => (
-                        <React.Fragment key={idx}>
-                            <LogBox category={item.category} date={item.date} kind={item.kind} datetime={item.datetime}
-                                    weather={item.weather} imageUrl={item.image_url} idx={item.idx} dbmemo={item.dbmemo}/>
+                    {/* <React.Fragment>
+                        <LogBox category={diseases.category} kind={diseases.kind} date={diseases.date} datetime={diseases.datetime}
+                                weather={diseases.weather} imageUrl={diseases.image_url} dbmemo={diseases.dbmemo}/>
+                    </React.Fragment> */}
+                    {diseases && diseases.map((item) => (
+                        <React.Fragment>
+                            <LogBox category={item.category} kind={item.kind} date={item.date} datetime={item.datetime}
+                                    weather={item.weather} imageUrl={item.image_url} dbmemo={item.dbmemo}/>
                         </React.Fragment>
                     ))}
                     {/* {logDate.map((log) => (

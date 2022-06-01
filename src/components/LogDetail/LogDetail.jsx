@@ -6,23 +6,26 @@ import axios from 'axios';
 
 
 const LogDetail = (props) => {
-    // console.log(props.datetime, '@')
     const [values, setValues] = React.useState({
         crop: props.crop,
         bug: props.bug,
         weather: props.weather[0],
         memo: props.dbmemo
     });
-    const handleChange = (prop) => (event) => {
-        setValues({...values, [prop]: event.target.value});
+    const handleChange = (props) => (event) => {
+        setValues({...values, [props]: event.target.value});
     };
     const handleClickSave = () => {
-        axios.post('http://127.0.0.1:8000/api/v1/postMemo', {idx: props.idx, crop: props.crop, bug: props.bug, weather: props.weather[0], memo: values.memo, datetime: props.datetime[0]})
-        // console.log(props.crop)
-        // console.log(props.bug)
-        // console.log(props.weather[0])
-        // console.log(values.memo)
-        //    클릭시 일지 저장하는 state Fucntion
+        axios.post('http://127.0.0.1:8000/api/v1/postMemo', {
+            date: props.date,
+            datetime: props.datetime,
+            crop: props.crop,
+            bug: props.bug,
+            weather: props.weather[0],
+            memo: values.memo
+        }).catch(error => {
+            console.log(error.response)
+        });
     }
     const [open, setOpen] = React.useState(true);
 

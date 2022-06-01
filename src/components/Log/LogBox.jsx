@@ -82,7 +82,7 @@ function LogBox(prop) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <LogDetail idx={prop.idx} date={date2} crop='배추' bug={kind2} handleClose={handleClose} datetime={datetime} weather={prop.weather} dbmemo={prop.dbmemo}/>
+                    <LogDetail date={date2} crop='배추' bug={kind2} handleClose={handleClose} datetime={datetime} weather={prop.weather} dbmemo={prop.dbmemo}/>
                 </Box>
             </Modal>
 
