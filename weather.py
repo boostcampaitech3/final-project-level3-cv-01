@@ -3,10 +3,9 @@ import requests
 import json
 import datetime
 
-
 def today_weather(date, input_datetime, lat, lng):
     url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?"
-    service_key = "kK+hUecCXInxgNTPSHW+P132fAuWPScRIujCRBLQQJ9w1J3S+sHfNBxM+DbgdE36m2pj6hS+kSkzGPBRKwghJg=="
+    ServiceKey = "kK+hUecCXInxgNTPSHW+P132fAuWPScRIujCRBLQQJ9w1J3S+sHfNBxM+DbgdE36m2pj6hS+kSkzGPBRKwghJg=="
 
     base_date = ''.join(date.split('-'))
     base_time = ''.join(input_datetime.split(':'))
@@ -30,7 +29,8 @@ def today_weather(date, input_datetime, lat, lng):
         base_time = "2300"
 
     params ={
-        'serviceKey' : service_key,
+        'ServiceKey' : ServiceKey,
+        'numOfRows' : '113',
         'dataType' : 'json',
         'base_date' : base_date,
         'base_time' : base_time,
@@ -40,8 +40,10 @@ def today_weather(date, input_datetime, lat, lng):
 
     # 값 요청
     res = requests.get(url, params=params)
-    items = res.json().get('response').get('body').get('items')
-
+    try:
+        items = res.json().get('response').get('body').get('items')
+    except:
+        return False
     weather_data = dict()
     weather_data['date'] = date
     for item in items['item']:
