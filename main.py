@@ -9,7 +9,7 @@ import datetime
 import weather
 from upload import *
 from getS3contents import *
-
+from collections import deque
 
 app = FastAPI()
 
@@ -47,21 +47,32 @@ async def login(user: user):
     else:
         return {"Authorization" : False}
 
-# 테스트 부분
-# upload_file('./호랑이.jpeg', 'smartfarmtv')
-objects_list = make_objects_list('smartfarmtv')
-tiger = make_object('smartfarmtv', objects_list[-1])
-date, input_datetime = get_image_date(tiger)
-img_url = get_image_url(tiger)
 
-tw = weather.today_weather(date, input_datetime, 60, 120)  # 날짜, 시간, 위치, 경도
+objects_list = make_objects_list('smartfarmtv')
+data_list = [make_object('smartfarmtv', obj) for idx, obj in enumerate(objects_list)]
+date_list = [get_image_date(data) for data in data_list]
+tw = weather.today_weather(date_list[-1][0], date_list[-1][1], 60, 120) # 날짜, 시간, 위치, 경도
+time_list = [{'datetime' : get_image_date(data)[1]} for data in data_list]
+url_list = [get_image_url(data) for data in data_list]
+
 
 @app.post('/api/v1/postDisease')
 async def postDisease():
-    response = [{"idx": 1, "category": "disease", "date": date, "kind": "병", "datetime": [{'id': '1', 'datetime': input_datetime}], "weather": [{'state' : tw['state'], 'temperature' : tw['temperature'], "precipitation": tw["precipitation"]}], "image_url": img_url}]
-    return {
-        "diseases": response
-    }
+    id = 0
+    category = "disease"
+    # 모델에서 나온 결과에 따라 category 판별 일단 test용으로 disease로 설정
+
+    response_disease = [
+        {"idx": 1, "category": "disease", "date": date_list[0][0], "kind": "병", "datetime": time_list, "weather": [tw['state'], tw['temperature']], "image_url": url_list[0]}
+        ]
+    response_bug = [
+        {"idx": 2, "category": "bug", "date": date_list[0][0], "kind": "해충", "datetime": time_list, "weather": [tw['state'], tw['temperature']], "image_url": url_list[0]},
+        ]
+        
+
+    return {"diseases": response_disease} if category == "disease" else {"diseases" : response_bug}
+    
+
 
 @app.post('/api/v1/postWeather')
 async def postWeather():
