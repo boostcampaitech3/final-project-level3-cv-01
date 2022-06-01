@@ -6,12 +6,12 @@ import axios from 'axios';
 
 
 const LogDetail = (props) => {
-    console.log(props.datetime, '@')
+    // console.log(props.datetime, '@')
     const [values, setValues] = React.useState({
         crop: props.crop,
         bug: props.bug,
         weather: props.weather[0],
-        memo: ''
+        memo: props.dbmemo
     });
     const handleChange = (prop) => (event) => {
         setValues({...values, [prop]: event.target.value});

@@ -101,7 +101,7 @@ function Log() {
                     {diseases.map((item, idx) => (
                         <React.Fragment key={idx}>
                             <LogBox category={item.category} date={item.date} kind={item.kind} datetime={item.datetime}
-                                    weather={item.weather} imageUrl={item.image_url} idx={item.idx}/>
+                                    weather={item.weather} imageUrl={item.image_url} idx={item.idx} dbmemo={item.dbmemo}/>
                         </React.Fragment>
                     ))}
                     {/* {logDate.map((log) => (
