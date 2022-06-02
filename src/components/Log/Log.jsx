@@ -104,12 +104,12 @@ function Log() {
                                     weather={item.weather} imageUrl={item.image_url} idx={item.idx}/>
                         </React.Fragment>
                     ))}
-                    {/* {logDate.map((log) => (
-                        <React.Fragment key={log.id}>
-                            <LogBox category={log.category} date={log.date} kind={log.kind} datetime={log.datetime}
-                                    weather={log.weather} imageUrl={log.image_url} />
-                        </React.Fragment>
-                    ))} */}
+                    {/* {logDate.map((log) => (*/}
+                    {/*    <React.Fragment key={log.id}>*/}
+                    {/*        <LogBox category={log.category} date={log.date} kind={log.kind} datetime={log.datetime}*/}
+                    {/*                weather={log.weather} imageUrl={log.image_url} />*/}
+                    {/*    </React.Fragment>*/}
+                    {/*))}*/}
                 </Box>
                 <SimpleBottomNavigation/>
             </Container>

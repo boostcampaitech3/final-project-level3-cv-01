@@ -7,6 +7,8 @@ import {Grid} from "@mui/material"
 import LogDetail from "../LogDetail/LogDetail";
 import Modal from "@mui/material/Modal";
 import LogDateBox from "./LogDateBox";
+// import trash from './0001.jpg'
+
 const theme = createTheme({
 
     palette: {
@@ -100,8 +102,9 @@ function LogBox(prop) {
             >
                 <Box sx={style}>
                     <LogDateBox date={date2} handleClick={handleCropClick} datetime={datetime}/>
+                    <br />
                     <img src={prop.imageUrl} alt="결과 이미지" style={{maxWidth: '100%'}}/>
-                    {/* <img src={trash} alt="결과 이미지" style={{maxWidth: '100%'}}/> */}
+                     {/*<img src={trash} alt="결과 이미지" style={{maxWidth: '100%'}}/>*/}
                 </Box>
 
 

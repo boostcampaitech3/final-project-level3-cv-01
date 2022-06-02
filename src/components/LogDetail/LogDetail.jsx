@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, FilledInput, Typography, Container} from "@mui/material";
+import {Button, FilledInput, Typography, Container, Box} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import LogDateBox from "../Log/LogDateBox";
 import axios from 'axios';
@@ -34,29 +34,25 @@ const LogDetail = (props) => {
         <Container>
             <LogDateBox date={props.date} handleClick={handleClick} datetime={props.datetime} />
 
-            <Typography variant="h6" sx={{color: 'text.darker'}}>피해작물</Typography>
-            <FilledInput
-                readOnly={true}
-                fullWidth
-                placeholder={props.crop}
-                sx={{color: 'text.darker', marginTop: 1, marginBottom: 2}}
-            />
+            <Typography variant="h6" sx={{color: 'text.darker', marginBottom: 1}}>피해작물</Typography>
+            <Box sx={{border: 'solid', p: 2, borderRadius: 4}}>
+                <Typography variant="h8" sx={{color: 'text.darker'}}>{props.crop}</Typography>
+            </Box>
 
-            <Typography variant="h6" sx={{color: 'text.darker'}}>병해충명</Typography>
-            <FilledInput
-                readOnly={true}
-                fullWidth
-                placeholder={props.bug}
-                sx={{color: 'text.darker', marginTop: 1, marginBottom: 2}}
-            />
+            <Typography variant="h6" sx={{color: 'text.darker', marginBottom: 1}}>병해충명</Typography>
+            <Box sx={{border: 'solid', p: 2, borderRadius: 4}}>
+                <Typography variant="h8" sx={{color: 'text.darker'}}>{props.bug}</Typography>
+            </Box>
 
-            <Typography variant="h6" sx={{color: 'text.darker'}}>날씨</Typography>
-            <FilledInput
-                readOnly={true}
-                fullWidth
-                placeholder={`${props.weather[0].state} / 강수량 - ${props.weather[0].precipitation}mm`}
-                sx={{color: 'text.darker', marginTop: 1, marginBottom: 2}}
-            />
+
+            <Typography variant="h6" sx={{color: 'text.darker', marginBottom: 1}}>날씨</Typography>
+            <Box sx={{border: 'solid', p: 2, borderRadius: 4}}>
+                <Typography variant="h8" sx={{color: 'text.darker'}}>{`${props.weather[0].state} / 강수량 - ${props.weather[0].precipitation}mm`}</Typography>
+            </Box>
+            {/*<Box sx={{border: 'solid', p: 2, borderRadius: 4}}>*/}
+            {/*    <Typography variant="h8" sx={{color: 'text.darker'}}>{props.bug}</Typography>*/}
+            {/*</Box>*/}
+
 
             <Typography variant="h6" sx={{color: 'text.darker'}}>일지</Typography>
             <FilledInput
@@ -66,7 +62,7 @@ const LogDetail = (props) => {
                 multiline
                 value={values.memo}
                 variant="filled"
-                sx={{color: 'text.darker', marginBottom: 2}}
+                sx={{color: 'text.darker', marginBottom: 2, bgcolor: 'background.main'}}
             />
             <Grid container>
                 <Grid item xs>
