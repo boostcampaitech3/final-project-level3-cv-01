@@ -37,7 +37,7 @@ function LogDateBox(props) {
                     MenuProps={MenuProps}
                 >
                     {props.datetime.map((dt) =>
-                        <MenuItem sx={{pl: 4}} key={dt.id} value={dt.weather} sx={{color: 'text.darker', borderColor: 'text.darker'}}>
+                        <MenuItem key={dt.id} value={dt.weather} sx={{color: 'text.darker', borderColor: 'text.darker', pl: 4}}>
                             {dt.datetime}
                         </MenuItem>
                     )}
