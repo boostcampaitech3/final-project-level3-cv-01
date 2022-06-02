@@ -7,6 +7,8 @@ import {Grid} from "@mui/material"
 import LogDetail from "../LogDetail/LogDetail";
 import Modal from "@mui/material/Modal";
 import LogDateBox from "./LogDateBox";
+// import trash from './0001.jpg'
+
 const theme = createTheme({
 
     palette: {
@@ -65,6 +67,13 @@ function LogBox(prop) {
         setOpen3(!open3);
     }
 
+
+    const [imageurl, setImageurl] = React.useState(`${prop.datetime[0].image_url}`);
+
+    const handleChange2 = (event) => {
+        setImageurl(event.target.value);
+    };
+
     const buttonBlock = (
         <ButtonGroup variant="outlined" aria-label="outlined button group"
                      sx={{width: '101%', marginLeft: -0.1, marginRight: -0.1}}>
@@ -82,7 +91,7 @@ function LogBox(prop) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <LogDetail idx={prop.idx} date={date2} crop='배추' bug={kind2} handleClose={handleClose} datetime={datetime} weather={prop.weather}/>
+                    <LogDetail date={date2} crop='배추' bug={kind2} handleClose={handleClose} datetime={datetime} weather={prop.weather} dbmemo={prop.dbmemo}/>
                 </Box>
             </Modal>
 
@@ -99,9 +108,10 @@ function LogBox(prop) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <LogDateBox date={date2} handleClick={handleCropClick} datetime={datetime}/>
-                    <img src={prop.imageUrl} alt="결과 이미지" style={{maxWidth: '100%'}}/>
-                    {/* <img src={trash} alt="결과 이미지" style={{maxWidth: '100%'}}/> */}
+                    <LogDateBox date={date2} handleClick={handleCropClick} datetime={datetime} value={imageurl} handle={handleChange2} type='Image'/>
+                    <br />
+                    {/*<img src={prop.imageUrl} alt="결과 이미지" style={{maxWidth: '100%'}}/>*/}
+                     <img src={imageurl} alt="결과 이미지" style={{maxWidth: '100%'}}/>
                 </Box>
 
 

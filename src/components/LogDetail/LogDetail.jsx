@@ -1,28 +1,38 @@
 import React from 'react';
-import {Button, FilledInput, Typography, Container} from "@mui/material";
+import {Button, FilledInput, Typography, Container, Box} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import LogDateBox from "../Log/LogDateBox";
 import axios from 'axios';
 
 
 const LogDetail = (props) => {
-    console.log(props.datetime, '@')
     const [values, setValues] = React.useState({
         crop: props.crop,
         bug: props.bug,
         weather: props.weather[0],
-        memo: ''
+        memo: props.dbmemo
     });
+
+    const [cweather, setCweather] = React.useState(`${props.weather[0]}`);
     const handleChange = (prop) => (event) => {
         setValues({...values, [prop]: event.target.value});
     };
+
+    const handleChange1 = (event) => {
+        setCweather(event.target.value);
+    };
+
     const handleClickSave = () => {
-        axios.post('http://127.0.0.1:8000/api/v1/postMemo', {idx: props.idx, crop: props.crop, bug: props.bug, weather: props.weather[0], memo: values.memo, datetime: props.datetime[0]})
-        // console.log(props.crop)
-        // console.log(props.bug)
-        // console.log(props.weather[0])
-        // console.log(values.memo)
-        //    클릭시 일지 저장하는 state Fucntion
+        axios.post('http://127.0.0.1:8000/api/v1/postMemo', {
+            date: props.date,
+            datetime: props.datetime,
+            crop: props.crop,
+            bug: props.bug,
+            weather: props.weather[0],
+            memo: values.memo
+        }).catch(error => {
+            console.log(error.response)
+        });
     }
     const [open, setOpen] = React.useState(true);
 
@@ -32,31 +42,27 @@ const LogDetail = (props) => {
 
     return (
         <Container>
-            <LogDateBox date={props.date} handleClick={handleClick} datetime={props.datetime} />
+            <LogDateBox date={props.date} handleClick={handleClick} datetime={props.datetime} type='Detail' handle={handleChange1} value={cweather}/>
 
-            <Typography variant="h6" sx={{color: 'text.darker'}}>피해작물</Typography>
-            <FilledInput
-                readOnly={true}
-                fullWidth
-                placeholder={props.crop}
-                sx={{color: 'text.darker', marginTop: 1, marginBottom: 2}}
-            />
+            <Typography variant="h6" sx={{color: 'text.darker', marginBottom: 1}}>피해작물</Typography>
+            <Box sx={{border: 'solid', p: 2, borderRadius: 4}}>
+                <Typography variant="h8" sx={{color: 'text.darker'}}>{props.crop}</Typography>
+            </Box>
 
-            <Typography variant="h6" sx={{color: 'text.darker'}}>병해충명</Typography>
-            <FilledInput
-                readOnly={true}
-                fullWidth
-                placeholder={props.bug}
-                sx={{color: 'text.darker', marginTop: 1, marginBottom: 2}}
-            />
+            <Typography variant="h6" sx={{color: 'text.darker', marginBottom: 1}}>병해충명</Typography>
+            <Box sx={{border: 'solid', p: 2, borderRadius: 4}}>
+                <Typography variant="h8" sx={{color: 'text.darker'}}>{props.bug}</Typography>
+            </Box>
 
-            <Typography variant="h6" sx={{color: 'text.darker'}}>날씨</Typography>
-            <FilledInput
-                readOnly={true}
-                fullWidth
-                placeholder={`${props.weather[0].state} / 강수량 - ${props.weather[0].precipitation}mm`}
-                sx={{color: 'text.darker', marginTop: 1, marginBottom: 2}}
-            />
+
+            <Typography variant="h6" sx={{color: 'text.darker', marginBottom: 1}}>날씨</Typography>
+            <Box sx={{border: 'solid', p: 2, borderRadius: 4}}>
+                <Typography variant="h8" sx={{color: 'text.darker'}}>{`${props.weather[0].state} / 강수량 - ${props.weather[0].precipitation}mm`}</Typography>
+            </Box>
+            {/*<Box sx={{border: 'solid', p: 2, borderRadius: 4}}>*/}
+            {/*    <Typography variant="h8" sx={{color: 'text.darker'}}>{props.bug}</Typography>*/}
+            {/*</Box>*/}
+
 
             <Typography variant="h6" sx={{color: 'text.darker'}}>일지</Typography>
             <FilledInput
@@ -66,7 +72,7 @@ const LogDetail = (props) => {
                 multiline
                 value={values.memo}
                 variant="filled"
-                sx={{color: 'text.darker', marginBottom: 2}}
+                sx={{color: 'text.darker', marginBottom: 2, bgcolor: 'background.main'}}
             />
             <Grid container>
                 <Grid item xs>

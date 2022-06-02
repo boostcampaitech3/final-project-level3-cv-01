@@ -61,7 +61,6 @@ const Home = () => {
     const handleChange = (event) => {
         setCamera(event.target.value);
     };
-
     useEffect(() => {
         if (localStorage.getItem('isLoggedIn') !== "true") {
             navigation('/login')
@@ -102,13 +101,11 @@ const Home = () => {
             />
         }
     }
-
-
     return (
         <ThemeProvider theme={theme}>
 
             <Container maxWidth='xs'
-                       sx={{alignItems: 'center', bgcolor: 'background.logo', minHeight: '100%', minWidth: '100%'}}>
+                       sx={{alignItems: 'center', bgcolor: 'background.logo', minHeight: 790, minWidth: '100%'}}>
 
                 <Box sx={{color: 'text.white', minHeight: '100%', minWidth: '100%', alignItems: 'center',  p : '5%'}}>
                     <img src={Logo} />
@@ -117,14 +114,16 @@ const Home = () => {
 
                 <Box sx={{
                     color: 'text.darker',
-                    borderTopLeftRadius: 50,
-                    borderTopRightRadius: 50,
+                    // borderTopLeftRadius: 50,
+                    // borderTopRightRadius: 50,
+                    borderRadius : 10,
                     p: 2,
                     margin: 0,
+                    minHeight: 580,
                     bgcolor: 'background.paper',
                 }}>
                     <Typography variant="h5"
-                                sx={{color: 'text.darker', textAlign: 'center', p: 1}}>작물관리
+                                sx={{color: 'text.darker', textAlign: 'center', p: 1, marginBottom : 1.5}}>작물관리
                     </Typography>
 
                     <Box
@@ -215,6 +214,7 @@ const Home = () => {
                                         </Box>
                                     </Stack>
                                 </Box>
+                                <br />
                                 <Box>
                                     <Stack direction="row" spacing={2}
                                            sx={{bgcolor: '#F2F2F2', borderBottomRightRadius: 6, borderBottomLeftRadius: 6, p: 1.5}}>
@@ -230,6 +230,7 @@ const Home = () => {
                                         </Box>
                                     </Stack>
                                 </Box>
+                                <br />
                                 <Button variant='contained' color='button_color' sx={{p: 1}}
                                         onClick={handleOpen}>실시간 작물 확인</Button>
                             </Stack>
@@ -299,8 +300,7 @@ const Home = () => {
 
             </Container>
             {/* 아래 여백 용 box */}
-            <Box sx={{minHeight: 60}}>
-            </Box>
+
             {/* Navigation */}
             <SimpleBottomNavigation/>
         </ThemeProvider>
