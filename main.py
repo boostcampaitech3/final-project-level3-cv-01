@@ -1,4 +1,6 @@
 import csv
+from time import time
+from urllib import response
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
@@ -33,12 +35,12 @@ class user(BaseModel):
     password: str
     
 class memo(BaseModel):
-    idx: int
+    date: str
+    datetime: list
     crop: str
     bug: str
     weather: dict
     memo: str
-    datetime: dict
 
 @app.post('/api/v1/login')
 async def login(user: user):
@@ -47,51 +49,67 @@ async def login(user: user):
     else:
         return {"Authorization" : False}
 
-
 objects_list = make_objects_list('smartfarmtv')
 data_list = [make_object('smartfarmtv', obj) for idx, obj in enumerate(objects_list)]
 date_list = [get_image_date(data) for data in data_list]
-tw = weather.today_weather(date_list[-1][0], date_list[-1][1], 60, 120) # 날짜, 시간, 위치, 경도
+weather_list = [weather.today_weather(date[0], date[1], 60, 120) for date in date_list]
 time_list = [{'datetime' : get_image_date(data)[1]} for data in data_list]
 url_list = [get_image_url(data) for data in data_list]
-
-
+    
 @app.post('/api/v1/postDisease')
 async def postDisease():
-    id = 0
-    category = "disease"
-    # 모델에서 나온 결과에 따라 category 판별 일단 test용으로 disease로 설정
+    response = [{
+        "category": "disease", 
+        "kind": "병", 
+        "date": date_list[0][0],
+        "datetime": time_list, 
+        "weather": [{
+            'state' : weather_list[0]['state'], 
+            'temperature' : weather_list[0]['temperature'], 
+            'precipitation' : weather_list[0]['precipitation']
+            }], 
+        "image_url": url_list[0], 
+        'dbmemo' : ''
+        }]
+    f = open('database.csv', 'r', encoding="utf-8")
+    rd = csv.reader(f)
+    for line in rd:
+        if line[0] == date_list[0][0]:  # db에 해당 날씨 정보가 있을 때 일지 추가
+            response[0]['dbmemo'] = line[-1]
+        else: continue
+    f.close()
 
-    response_disease = [
-        {"idx": 1, "category": "disease", "date": date_list[0][0], "kind": "병", "datetime": time_list, "weather": [tw['state'], tw['temperature']], "image_url": url_list[0]}
-        ]
-    response_bug = [
-        {"idx": 2, "category": "bug", "date": date_list[0][0], "kind": "해충", "datetime": time_list, "weather": [tw['state'], tw['temperature']], "image_url": url_list[0]},
-        ]
-        
-
-    return {"diseases": response_disease} if category == "disease" else {"diseases" : response_bug}
-    
-
+    return {
+        "diseases": response
+    }
 
 @app.post('/api/v1/postWeather')
 async def postWeather():
-    response = {'date' : tw['date'], 'temperature': tw['temperature'], 'state': tw['state'], 'precipitation': tw['precipitation']}
+    current_time = str(datetime.datetime.now()).split()
+    date, time = current_time[0], current_time[1][:5]
+    current_tw = weather.today_weather(date, time, 60, 120)
+    response = {'date' : current_tw['date'], 'temperature': current_tw['temperature'], 'state': current_tw['state'], 'precipitation': current_tw['precipitation']}
     return {
         "weather": response
     }
 
 @app.post('/api/v1/postMemo')
 async def postMemo(memo: memo):
-    print(memo)
-    f = open('database.csv', 'a', newline='', encoding="utf-8")
-    wr = csv.writer(f)
-    
-    print(memo.datetime)
-    idx = str(memo.idx) + '_' + str(memo.datetime["id"])
-    wr.writerow([idx, memo.crop, memo.bug, memo.weather, memo.memo])
-    f.close()
-    
+    fr = open('database.csv', 'r', encoding="utf-8")  # read
+    rd = csv.reader(fr)
+
+    temp = []
+    for line in rd:
+        if memo.date == line[0]:
+            line[-1] = memo.memo
+        temp.append(line)
+    fr.close()
+
+    fw = open('database.csv', 'w', newline='', encoding="utf-8")  # write   
+    wr = csv.writer(fw)
+    for t in temp:
+        wr.writerow(t)
+
+    fw.close()
 
     return {'response': "access"}
-
