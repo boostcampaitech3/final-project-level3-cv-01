@@ -48,7 +48,7 @@ function Log() {
     //     date: '2022-05-16',
     //     weather: {state: '맑음', precipitation: '0'},
     //     image_url : '0001.jpg',
-    //     datetime: [{id: 1, datetime: '05:26'}, {id: 2, datetime: '05:37'}]
+    //     datetime: [{id: 1, datetime: '05:26', image_url : '0001.jpg'}, {id: 2, datetime: '05:37', image_url : '0002.jpg'}]
     // }, {
     //     id: 2,
     //     kind: '병',
@@ -56,7 +56,7 @@ function Log() {
     //     date: '2022-05-31',
     //     weather: {state: '맑음', precipitation: '0'},
     //     image_url : './0001.jpg',
-    //     datetime: [{id: 1, datetime: '08:25'}, {id: 2, datetime: '09:45'}]
+    //     datetime: [{id: 1, datetime: '08:25', image_url : '0001.jpg'}, {id: 2, datetime: '09:45', image_url : '0002.jpg'}]
     // }]
 
     const [diseases, setDiseases] = useState([])

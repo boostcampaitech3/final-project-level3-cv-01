@@ -13,16 +13,23 @@ const LogDetail = (props) => {
         weather: props.weather[0],
         memo: ''
     });
+
+    const [cweather, setCweather] = React.useState(`${props.weather[0]}`);
     const handleChange = (prop) => (event) => {
         setValues({...values, [prop]: event.target.value});
     };
+
+    const handleChange1 = (event) => {
+        setCweather(event.target.value);
+    };
+
     const handleClickSave = () => {
         axios.post('http://127.0.0.1:8000/api/v1/postMemo', {idx: props.idx, crop: props.crop, bug: props.bug, weather: props.weather[0], memo: values.memo, datetime: props.datetime[0]})
         // console.log(props.crop)
         // console.log(props.bug)
         // console.log(props.weather[0])
         // console.log(values.memo)
-        //    클릭시 일지 저장하는 state Fucntion
+        //    클릭시 일지 저장하는 state Function
     }
     const [open, setOpen] = React.useState(true);
 
@@ -32,7 +39,7 @@ const LogDetail = (props) => {
 
     return (
         <Container>
-            <LogDateBox date={props.date} handleClick={handleClick} datetime={props.datetime} />
+            <LogDateBox date={props.date} handleClick={handleClick} datetime={props.datetime} type='Detail' handle={handleChange1} value={cweather}/>
 
             <Typography variant="h6" sx={{color: 'text.darker', marginBottom: 1}}>피해작물</Typography>
             <Box sx={{border: 'solid', p: 2, borderRadius: 4}}>
