@@ -40,6 +40,23 @@ const theme = createTheme({
 
 
 function Log() {
+    // const logDate = [{
+    //     id: 1,
+    //     kind: '벌레',
+    //     category: 'bug',
+    //     date: '2022-05-16',
+    //     weather: {state: '맑음', precipitation: '0'},
+    //     image_url : '0001.jpg',
+    //     datetime: [{id: 1, datetime: '05:26', image_url : '0001.jpg'}, {id: 2, datetime: '05:37', image_url : '0002.jpg'}]
+    // }, {
+    //     id: 2,
+    //     kind: '병',
+    //     category: 'disease',
+    //     date: '2022-05-31',
+    //     weather: {state: '맑음', precipitation: '0'},
+    //     image_url : './0001.jpg',
+    //     datetime: [{id: 1, datetime: '08:25', image_url : '0001.jpg'}, {id: 2, datetime: '09:45', image_url : '0002.jpg'}]
+    // }]
     const [diseases, setDiseases] = useState([])
     const navigation = useNavigate()
     useEffect(() => {
@@ -84,6 +101,12 @@ function Log() {
                                     weather={item.weather} imageUrl={item.image_url} dbmemo={item.dbmemo} idx={idx}/>
                         </React.Fragment>
                     ))}
+                    {/* {logDate.map((log) => (*/}
+                    {/*    <React.Fragment key={log.id}>*/}
+                    {/*        <LogBox category={log.category} date={log.date} kind={log.kind} datetime={log.datetime}*/}
+                    {/*                weather={log.weather} imageUrl={log.image_url} />*/}
+                    {/*    </React.Fragment>*/}
+                    {/*))}*/}
                 </Box>
                 <SimpleBottomNavigation/>
             </Container>
