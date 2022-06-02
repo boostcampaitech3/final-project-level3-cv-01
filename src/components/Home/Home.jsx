@@ -13,7 +13,13 @@ import {useNavigate} from 'react-router';
 import Logo from './logo.png'
 import axios from 'axios';
 
-import {mdiWeatherSnowyRainy, mdiWeatherPouring, mdiWeatherSnowyHeavy, mdiWeatherRainy, mdiWhiteBalanceSunny } from '@mdi/js';
+import {
+    mdiWeatherSnowyRainy,
+    mdiWeatherPouring,
+    mdiWeatherSnowyHeavy,
+    mdiWeatherRainy,
+    mdiWhiteBalanceSunny
+} from '@mdi/js';
 import Icon from '@mdi/react'
 
 const style = {
@@ -73,31 +79,31 @@ const Home = () => {
             <Icon path={mdiWeatherRainy}
                   title="비"
                   size={3}
-                  sx={{margin:0.5}}
+                  sx={{margin: 0.5}}
             />
         } else if (prop.state === '비/눈') {
             <Icon path={mdiWeatherSnowyRainy}
                   title="비/눈"
                   size={3}
-                  sx={{margin:0.5}}
+                  sx={{margin: 0.5}}
             />
         } else if (prop.state === '눈') {
             <Icon path={mdiWeatherSnowyHeavy}
                   title="눈"
                   size={3}
-                  sx={{margin:0.5}}
+                  sx={{margin: 0.5}}
             />
         } else if (prop.state === '소나기') {
             <Icon path={mdiWeatherPouring}
                   title="소나기"
                   size={3}
-                  sx={{margin:0.5}}
+                  sx={{margin: 0.5}}
             />
         } else {
-            <Icon path={ mdiWhiteBalanceSunny }
+            <Icon path={mdiWhiteBalanceSunny}
                   title="맑음"
                   size={3}
-                  sx={{margin:0.5}}
+                  sx={{margin: 0.5}}
             />
         }
     }
@@ -107,8 +113,8 @@ const Home = () => {
             <Container maxWidth='xs'
                        sx={{alignItems: 'center', bgcolor: 'background.logo', minHeight: 790, minWidth: '100%'}}>
 
-                <Box sx={{color: 'text.white', minHeight: '100%', minWidth: '100%', alignItems: 'center',  p : '5%'}}>
-                    <img src={Logo} />
+                <Box sx={{color: 'text.white', minHeight: '100%', minWidth: '100%', alignItems: 'center', p: '5%'}}>
+                    <img src={Logo}/>
                     {/*    Logo 삽입 예정*/}
                 </Box>
 
@@ -116,14 +122,14 @@ const Home = () => {
                     color: 'text.darker',
                     // borderTopLeftRadius: 50,
                     // borderTopRightRadius: 50,
-                    borderRadius : 10,
+                    borderRadius: 10,
                     p: 2,
                     margin: 0,
                     minHeight: 580,
                     bgcolor: 'background.paper',
                 }}>
                     <Typography variant="h5"
-                                sx={{color: 'text.darker', textAlign: 'center', p: 1, marginBottom : 1.5}}>작물관리
+                                sx={{color: 'text.darker', textAlign: 'center', p: 1, marginBottom: 1.5}}>작물관리
                     </Typography>
 
                     <Box
@@ -169,7 +175,7 @@ const Home = () => {
                                 <Icon path={mdiWhiteBalanceSunny}
                                       title="맑음"
                                       size={3}
-                                      sx={{margin:0.5}}
+                                      sx={{margin: 0.5}}
                                 />
                                 <br/>
                                 <Typography variant="h5"
@@ -181,15 +187,7 @@ const Home = () => {
                     </Box>
 
                     <Box sx={{p: 2, textAlign: 'center'}}>
-                        현재작물상태 :
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            sx={{minWidth: 120}}
-                        >
-                            <MenuItem value={10} sx={{color: 'text.darker'}}>배추</MenuItem>
-                        </Select>
-                        <br/>
+                        <Typography variant='h5'>현재작물상태 : 배추</Typography>
                     </Box>
 
                     <Divider variant="middle"/>
@@ -201,7 +199,12 @@ const Home = () => {
                                             sx={{color: 'text.darker', p: 1}}>피해발생 정보
                                 </Typography>
                                 <Box>
-                                    <Stack direction="row" spacing={2} sx={{bgcolor: '#F2F2F2', borderTopLeftRadius: 6, borderTopRightRadius: 6, p: 1.5}}>
+                                    <Stack direction="row" spacing={2} sx={{
+                                        bgcolor: '#F2F2F2',
+                                        borderTopLeftRadius: 6,
+                                        borderTopRightRadius: 6,
+                                        p: 1.5
+                                    }}>
                                         <Box>
                                             <Typography variant="h8"
                                                         sx={{color: 'text.darker'}}>해충
@@ -214,10 +217,15 @@ const Home = () => {
                                         </Box>
                                     </Stack>
                                 </Box>
-                                <br />
+                                <br/>
                                 <Box>
                                     <Stack direction="row" spacing={2}
-                                           sx={{bgcolor: '#F2F2F2', borderBottomRightRadius: 6, borderBottomLeftRadius: 6, p: 1.5}}>
+                                           sx={{
+                                               bgcolor: '#F2F2F2',
+                                               borderBottomRightRadius: 6,
+                                               borderBottomLeftRadius: 6,
+                                               p: 1.5
+                                           }}>
                                         <Box>
                                             <Typography variant="h8"
                                                         sx={{color: 'text.darker'}}>질병
@@ -230,7 +238,7 @@ const Home = () => {
                                         </Box>
                                     </Stack>
                                 </Box>
-                                <br />
+                                <br/>
                                 <Button variant='contained' color='button_color' sx={{p: 1}}
                                         onClick={handleOpen}>실시간 작물 확인</Button>
                             </Stack>
