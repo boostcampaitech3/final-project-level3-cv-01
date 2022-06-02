@@ -1,1 +1,2 @@
-2022-06-01,19:36,배추,병,"{'state': '맑음', 'temperature': '16', 'precipitation': '0'}",에라이
+2022-06-01,"[{'datetime': '13:14'}, {'datetime': '13:21'}, {'datetime': '13:23'}]",배추,병,"{'state': '맑음', 'temperature': '20', 'precipitation': '0'}",반가워요
+2022-06-02,"[{'datetime': '13:14'}, {'datetime': '13:21'}, {'datetime': '13:23'}]",배추,병,"{'state': '맑음', 'temperature': '20', 'precipitation': '0'}",ㄻㄹ

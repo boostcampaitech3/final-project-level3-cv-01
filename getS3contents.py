@@ -47,16 +47,15 @@ def get_image_date(object):
     """
     해당 이미지의 생성 날짜를 return
     """
-    obj = object.get()['ResponseMetadata']['HTTPHeaders']['date']
-    date_info = obj.split()
+
 
     month_list = {"Jan":1, "Feb":2, "Mar":3, "Apr":4, "May":5, "Jun":6, "Jul":7, "Aug":8, "Sep":9, "Oct":10, "Nov":11, "Dec":12} 
 
-    year, day, hour, minute = int(date_info[3]), int(date_info[1]), int(date_info[4][:2]), int(date_info[4][3:5])
-    month = month_list[date_info[2]]
-    KST = datetime.timezone(datetime.timedelta(hours=9))
+    # 한국 시간으로 변경
+    KST = datetime.timedelta(hours=9)
 
-    korea_time = str(datetime.datetime(year, month, day, hour, minute, 0, tzinfo=KST)).split()
+    obj = object.get()['LastModified']
+    korea_time = str(obj + KST).split()
 
     date, time = korea_time[0], korea_time[1][:5]
     return date, time
@@ -73,20 +72,12 @@ def get_image_url(object):
     s3_client = boto3.client('s3')
     location = s3_client.get_bucket_location(Bucket=bucketname)["LocationConstraint"]
     
-    # if get_image_type(object) == 'jpg':
-    #     imageType = 'jpg'
-    # elif get_image_type(object) == 'jpeg':
-    #     imageType = 'jpeg'
 
     return f"https://{bucketname}.s3.{location}.amazonaws.com/{filename}"
 
 
+def get_standard_data():
+    pass
 
-# objects_list = make_objects_list('smartfarmtv')
-# tiger = make_object('smartfarmtv', objects_list[-1])
-
-
-# date, datetime = get_image_date(tiger)
-# print(date, datetime)
 
 
