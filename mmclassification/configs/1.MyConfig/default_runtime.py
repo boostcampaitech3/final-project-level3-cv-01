@@ -9,7 +9,7 @@ log_config = dict(
             init_kwargs=dict(
                 project='cabbage_classify',
                 entity = 'cv_01-2',
-                name = 'resnext152_augmented'
+                name = 'resnext152_augmented_3label'
              )     ),
     ])
 # yapf:enable

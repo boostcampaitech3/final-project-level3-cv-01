@@ -64,6 +64,7 @@ test_pipeline = [
     dict(type='Normalize', **img_norm_cfg),
     dict(type='ImageToTensor', keys=['img']),
     dict(type='Collect', keys=['img'])
+    
 ]
 
 data = dict(
@@ -76,19 +77,22 @@ data = dict(
         dataset = dict(
         type=dataset_type,
         data_prefix='/opt/ml/input/Project/data/Training/image',
-        ann_file='/opt/ml/input/Project/data/Training/train.csv',
+        ann_file='/opt/ml/input/Project/data/Training/train_3label.csv',
         pipeline=train_pipeline)
 
     ),
     val=dict(
         type=dataset_type,
         data_prefix='/opt/ml/input/Project/data/Validation/image',
-        ann_file='/opt/ml/input/Project/data/Validation/validation.csv',
+        ann_file='/opt/ml/input/Project/data/Validation/validation_3label.csv',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
-        data_prefix='/opt/ml/input/Project/data/Validation/image',
-        ann_file='/opt/ml/input/Project/data/Validation/validation.csv',
+        data_prefix='/opt/ml/input/Project/data/Test/',
+        #ann_file='/opt/ml/input/Project/data/Test/inference.csv',
         pipeline=test_pipeline))
 
-evaluation = dict(interval=1, metric='accuracy', save_best='accuracy_top-1')
+#evaluation = dict(interval=1, metric='accuracy',save_best = 'auto')
+evaluation = dict(interval=1, metric='accuracy',save_best='accuracy_top-1')
+
+#', save_best='accuracy_top-1'

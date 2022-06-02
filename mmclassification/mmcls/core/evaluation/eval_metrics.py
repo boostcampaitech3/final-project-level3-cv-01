@@ -125,6 +125,7 @@ def precision_recall_f1(pred, target, average_mode='macro', thrs=0.):
             f1_score = f1_score.detach().cpu().numpy()
         else:
             raise ValueError(f'Unsupport type of averaging {average_mode}.')
+        print(f1_score)
         precisions.append(precision)
         recalls.append(recall)
         f1_scores.append(f1_score)
@@ -196,6 +197,7 @@ def recall(pred, target, average_mode='macro', thrs=0.):
 
 
 def f1_score(pred, target, average_mode='macro', thrs=0.):
+   
     """Calculate F1 score according to the prediction and target.
 
     Args:
