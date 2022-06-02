@@ -6,6 +6,7 @@ import axios from 'axios';
 
 
 const LogDetail = (props) => {
+    console.log(props.weather[0])
     const [values, setValues] = React.useState({
         crop: props.crop,
         bug: props.bug,

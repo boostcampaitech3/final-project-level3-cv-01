@@ -9,6 +9,7 @@ import List from "@mui/material/List";
 
 
 function LogDateBox(props) {
+    console.log(props.datetime,'@')
     const [open, setOpen] = React.useState(true);
 
     const handleClick = () => {
@@ -25,11 +26,11 @@ function LogDateBox(props) {
             </ListItemButton>
             <Collapse in={!open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    {/* {props.datetime.map((dt) => */}
-                    <ListItemButton sx={{pl: 4}}>
-                        <ListItemText primary={props.datetime}/>
-                    </ListItemButton>
-                    {/* )} */}
+                    {props.datetime.map((dt) =>
+                        <ListItemButton sx={{pl: 4}} key={dt.id}>
+                            <ListItemText primary={dt.datetime}/>
+                        </ListItemButton>
+                        )}
                 </List>
             </Collapse>
         </Box>
