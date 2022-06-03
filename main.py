@@ -101,14 +101,16 @@ async def postWeather():
 async def postMemo(memo: memo):
     fr = open('database.csv', 'r', encoding="utf-8")  # read
     rd = csv.reader(fr)
-
     temp = []
+    flag = True
     for line in rd:
         if memo.date == line[0]:
             line[-1] = memo.memo
+            flag = False
         temp.append(line)
     fr.close()
-
+    if flag:
+        temp.append([memo.date, memo.datetime, memo.crop, memo.bug, memo.weather, memo.memo])
     fw = open('database.csv', 'w', newline='', encoding="utf-8")  # write   
     wr = csv.writer(fw)
     for t in temp:
