@@ -13,13 +13,13 @@ const LogDetail = (props) => {
         memo: props.dbmemo
     });
 
-    const [cweather, setCweather] = React.useState(`${props.weather[0]}`);
+    const [date, setDate] = React.useState(`${props.datetime[0].datetime}`);
     const handleChange = (prop) => (event) => {
         setValues({...values, [prop]: event.target.value});
     };
 
     const handleChange1 = (event) => {
-        setCweather(event.target.value);
+        setDate(event.target.value);
     };
 
     const handleClickSave = () => {
@@ -42,7 +42,7 @@ const LogDetail = (props) => {
 
     return (
         <Container>
-            <LogDateBox date={props.date} handleClick={handleClick} datetime={props.datetime} type='Detail' handle={handleChange1} value={cweather}/>
+            <LogDateBox date={props.date} handleClick={handleClick} datetime={props.datetime} type='Detail' handle={handleChange1} value={date}/>
 
             <Typography variant="h6" sx={{color: 'text.darker', marginBottom: 1}}>피해작물</Typography>
             <Box sx={{border: 'solid', p: 2, borderRadius: 4}}>
