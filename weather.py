@@ -13,17 +13,17 @@ def today_weather(date, input_datetime, lat, lng):
     # base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300
     if int(base_time) < int("0500"): 
         base_time = "0200" 
-    elif int(base_time) >= int("0500") and int(base_time) < int("0800"):
+    elif int(base_time) < int("0800"):
         base_time = "0500" 
-    elif int(base_time) >= int("0800") and int(base_time) < int("1100"):
+    elif int(base_time) < int("1100"):
         base_time = "0800" 
-    elif int(base_time) >= int("1100") and int(base_time) < int("1400"):
+    elif int(base_time) < int("1400"):
         base_time = "1100" 
-    elif int(base_time) >= int("1400") and int(base_time) < int("1700"):
+    elif int(base_time) < int("1700"):
         base_time = "1400" 
-    elif int(base_time) >= int("1700") and int(base_time) < int("2000"): 
+    elif int(base_time) < int("2000"): 
         base_time = "1700" 
-    elif int(base_time) >= int("2000") and int(base_time) < int("2300"): 
+    elif int(base_time) < int("2300"): 
         base_time = "2000" 
     else:
         base_time = "2300"
@@ -46,23 +46,29 @@ def today_weather(date, input_datetime, lat, lng):
         return False
     weather_data = dict()
     weather_data['date'] = date
+    weather_states = {'1' : '비', '2' : '비/눈', '3' : '눈', '4' : '소나기'}
     for item in items['item']:
         # 강수형태
         if item['category'] == 'PTY':
             
             weather_code = item['fcstValue']
             
-            if weather_code == '1':
-                weather_state = '비'
-            elif weather_code == '2':
-                weather_state = '비/눈'
-            elif weather_code == '3':
-                weather_state = '눈'
-            elif weather_code == '4':
-                weather_state = '소나기'
+            # if weather_code == '1':
+            #     weather_state = '비'
+            # elif weather_code == '2':
+            #     weather_state = '비/눈'
+            # elif weather_code == '3':
+            #     weather_state = '눈'
+            # elif weather_code == '4':
+            #     weather_state = '소나기'
+            # else:
+            #     weather_state = '맑음'
+
+            if weather_code in weather_states.keys():
+                weather_state = weather_states[weather_code]
             else:
                 weather_state = '맑음'
-            
+
             weather_data['state'] = weather_state
 
         # 1시간 강수량
@@ -74,6 +80,3 @@ def today_weather(date, input_datetime, lat, lng):
             weather_data['temperature'] = item['fcstValue']
         
     return weather_data 
-
-# print(today_weather("20220531", 60, 128))
-# {'temperature': '20', 'state': '맑음', 'precipitation': '0'} 20도 맑음 강수량 0 
