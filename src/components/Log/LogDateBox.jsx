@@ -14,7 +14,6 @@ const MenuProps = {
 };
 
 function LogDateBox(props) {
-    const [open, setOpen] = React.useState(true);
     const boxType = props.type
     const value = props.value
 
@@ -37,7 +36,7 @@ function LogDateBox(props) {
                     MenuProps={MenuProps}
                 >
                     {props.datetime.map((dt) =>
-                        <MenuItem key={dt.id} value={dt.weather} sx={{pl: 4, color: 'text.darker', borderColor: 'text.darker'}}>
+                        <MenuItem key={dt.id} value={dt.datetime} sx={{pl: 4, color: 'text.darker', borderColor: 'text.darker'}}>
                             {dt.datetime}
                         </MenuItem>
                     )}
