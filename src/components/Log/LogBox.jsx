@@ -137,7 +137,7 @@ function LogBox(prop) {
                         </Box>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sx={{textAlign: 'left', marginLeft: 2}}>
-                                <Typography>해충 피해 발생</Typography>
+                                <Typography>{kind2} 피해 발생 </Typography>
                             </Grid>
                             <Grid item xs={12} sx={{textAlign: 'left', marginLeft: 2}}>
                                 <Typography>{date2}</Typography>
@@ -160,7 +160,7 @@ function LogBox(prop) {
                         </Box>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sx={{textAlign: 'left', marginLeft: 2}}>
-                                <Typography>질병 피해 발생</Typography>
+                                <Typography>{kind2} 피해 발생</Typography>
                             </Grid>
                             <Grid item xs={12} sx={{textAlign: 'left', marginLeft: 2}}>
                                 <Typography>{date2}</Typography>
