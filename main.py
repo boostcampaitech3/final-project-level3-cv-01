@@ -11,8 +11,7 @@ import datetime
 import weather
 from upload import *
 from getS3contents import *
-from collections import deque
-
+from cls_kind import *
 app = FastAPI()
 
 origins = [
@@ -49,15 +48,20 @@ async def login(user: user):
     else:
         return {"Authorization" : False}
 
+
+
 objects_list = make_objects_list('smartfarmtv')
-data_list = [make_object('smartfarmtv', obj) for idx, obj in enumerate(objects_list)]
+data_list = [make_object('smartfarmtv', obj) for obj in objects_list]
+# date_list = [get_date(obj) for obj in objects_list]
 date_list = [get_image_date(data) for data in data_list]
 weather_list = [weather.today_weather(date[0], date[1], 60, 120) for date in date_list]
-time_list = [{'datetime' : get_image_date(data)[1]} for data in data_list]
 url_list = [get_image_url(data) for data in data_list]
-    
+time_list = [{'datetime' : date[1], 'image_url' : url} for date, url in zip(date_list, url_list)]
+kind_list = [get_cls_kind(obj) for obj in objects_list]
+
 @app.post('/api/v1/postDisease')
 async def postDisease():
+
     response = [{
         "category": "disease", 
         "kind": "병", 
