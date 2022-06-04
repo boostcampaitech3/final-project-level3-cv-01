@@ -37,3 +37,10 @@ def upload_file(file_name, bucket, object_name=None):
         logging.error(e)
         return False
     return True
+
+def download_file(bucket, filname, img_path):
+    '''
+    img_path : 다운받은 이미지 저장 경로 설정 
+    '''
+    s3 = boto3.client('s3')
+    s3.download_file('smartfarmtv', filname, img_path)
