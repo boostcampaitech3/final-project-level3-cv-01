@@ -9,7 +9,7 @@ from typing import List
 import os
 import datetime
 import weather
-from upload import *
+from S3_file_management import *
 from getS3contents import *
 from cls_kind import *
 
@@ -50,53 +50,19 @@ async def login(user: user):
         return {"Authorization" : False}
 
 
-
-objects_list = make_objects_list('smartfarmtv')
-n = len(objects_list)
-data_list = [make_object('smartfarmtv', obj) for obj in objects_list]
-# date_list = [get_date(obj) for obj in objects_list]
-date_list = [get_image_date(data) for data in data_list]
-weather_list = [weather.today_weather(date[0], date[1], 60, 120) for date in date_list]
-url_list = [get_image_url(data) for data in data_list]
-time_list = [{'datetime' : date[1], 'image_url' : url} for date, url in zip(date_list, url_list)]
-kind_list = [get_cls_kind(obj) for obj in objects_list]
+response = get_standard_data()
+f = open('database.csv', 'r', encoding="utf-8")
+rd = csv.reader(f)
+for line in rd:
+    print(line[0], response[0]['date'], response[1]['date'], line[3], response[0]['kind'], response[1]['kind'])
+    if line[0] == response[0]['date'] and line[3] == response[0]['kind']:  # db에 해당 날씨 정보가 있을 때 일지 추가
+        response[0]['dbmemo'] = line[-1]
+    if line[0] == response[1]['date'] and line[3] == response[1]['kind']:
+        response[1]['dbmemo'] = line[-1]
+f.close()
 
 @app.post('/api/v1/postDisease')
 async def postDisease():
-    response = [{
-        "category": kind_list[0][0], 
-        "kind": kind_list[0][1], 
-        "date": date_list[0][0],
-        "datetime": time_list, 
-        "weather": [{
-            'state' : weather_list[0]['state'], 
-            'temperature' : weather_list[0]['temperature'], 
-            'precipitation' : weather_list[0]['precipitation']
-            }], 
-        "image_url": url_list[0], 
-        'dbmemo' : '',
-        }, 
-        {
-        "category": kind_list[0][0], 
-        "kind": 'bug', 
-        "date": date_list[0][0],
-        "datetime": time_list, 
-        "weather": [{
-            'state' : weather_list[0]['state'], 
-            'temperature' : weather_list[0]['temperature'], 
-            'precipitation' : weather_list[0]['precipitation']
-            }], 
-        "image_url": url_list[0], 
-        'dbmemo' : '',
-        }]
-    f = open('database.csv', 'r', encoding="utf-8")
-    rd = csv.reader(f)
-    for line in rd:
-        if line[0] == response[0]['date'] and line[3] == response[0]['kind']:  # db에 해당 날씨 정보가 있을 때 일지 추가
-            response[0]['dbmemo'] = line[-1]
-        if line[0] == response[1]['date'] and line[3] == response[1]['kind']:
-            response[1]['dbmemo'] = line[-1]
-    f.close()
     return {
         "diseases": response
     }

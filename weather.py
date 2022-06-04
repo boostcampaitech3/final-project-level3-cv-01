@@ -39,11 +39,11 @@ def today_weather(date, input_datetime, lat, lng):
         }
 
     # 값 요청
-    res = requests.get(url, params=params)
+    res = requests.get(url, params=params, allow_redirects=False)
     try:
         items = res.json().get('response').get('body').get('items')
     except:
-        return False
+        return {'date': '0000-00-00', 'temperature': '0', 'state': '시간 안나와', 'precipitation': '0'}
     weather_data = dict()
     weather_data['date'] = date
     weather_states = {'1' : '비', '2' : '비/눈', '3' : '눈', '4' : '소나기'}

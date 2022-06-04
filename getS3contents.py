@@ -1,5 +1,8 @@
 import boto3
+import csv
 import datetime
+from cls_kind import *
+import weather
 
 def get_all_objects(s3, **base_kwargs):
     continuation_token = None
@@ -77,7 +80,63 @@ def get_image_url(object):
 
 
 def get_standard_data():
-    pass
+    objects_list = make_objects_list('smartfarmtv')[:-1]
+    Bug_list = []
+    Disease_list = []
 
+    for data in objects_list:
+        if data[2] == 'D':
+            Disease_list.append(data)
+        else:
+            Bug_list.append(data)
+
+    Bug_data_list = [make_object('smartfarmtv', obj) for obj in Bug_list]
+    Disease_data_list = [make_object('smartfarmtv', obj) for obj in Disease_list]
+
+    Bug_kind_list = [get_cls_kind(obj) for obj in Bug_list]
+    Disease_kind_list = [get_cls_kind(obj) for obj in Disease_list]
+
+    Bug_date_list = [get_image_date(data) for data in Bug_data_list]
+    Disease_date_list = [get_image_date(data) for data in Disease_data_list]
+
+    weather_list = [weather.today_weather(date[0], date[1], 60, 120) for date in Disease_date_list]
+
+    Bug_url_list = [get_image_url(data) for data in Bug_data_list]
+    Disease_url_list = [get_image_url(data) for data in Disease_data_list]
+
+    Bug_time_list = [{'datetime' : date[1], 'image_url' : url} for date, url in zip(Bug_date_list, Bug_url_list)]
+    Disease_time_list = [{'datetime' : date[1], 'image_url' : url} for date, url in zip(Disease_date_list, Disease_url_list)]
+
+    responese = []
+    for category, kind in Disease_kind_list:
+        responese.append({
+                "category": category, 
+                "kind": kind, 
+                "date": Disease_date_list[0][0],
+                "datetime": Disease_time_list, 
+                "weather": [{
+                    'state' : weather_list[0]['state'], 
+                    'temperature' : weather_list[0]['temperature'], 
+                    'precipitation' : weather_list[0]['precipitation']
+                    }], 
+                "image_url": Disease_url_list[0], 
+                'dbmemo' : ''
+                })
+
+    for category, kind in Bug_kind_list:
+        responese.append({
+                "category": category, 
+                "kind": kind, 
+                "date": Bug_date_list[0][0],
+                "datetime": Bug_time_list, 
+                "weather": [{
+                    'state' : weather_list[0]['state'], 
+                    'temperature' : weather_list[0]['temperature'], 
+                    'precipitation' : weather_list[0]['precipitation']
+                    }], 
+                "image_url": Bug_url_list[0], 
+                'dbmemo' : ''
+                })
+    return responese
 
 
