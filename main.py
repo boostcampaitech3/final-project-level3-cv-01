@@ -12,6 +12,7 @@ import weather
 from upload import *
 from getS3contents import *
 from cls_kind import *
+
 app = FastAPI()
 
 origins = [
@@ -51,6 +52,7 @@ async def login(user: user):
 
 
 objects_list = make_objects_list('smartfarmtv')
+n = len(objects_list)
 data_list = [make_object('smartfarmtv', obj) for obj in objects_list]
 # date_list = [get_date(obj) for obj in objects_list]
 date_list = [get_image_date(data) for data in data_list]
@@ -61,10 +63,9 @@ kind_list = [get_cls_kind(obj) for obj in objects_list]
 
 @app.post('/api/v1/postDisease')
 async def postDisease():
-
     response = [{
-        "category": "disease", 
-        "kind": "병", 
+        "category": kind_list[0][0], 
+        "kind": kind_list[0][1], 
         "date": date_list[0][0],
         "datetime": time_list, 
         "weather": [{
@@ -73,16 +74,29 @@ async def postDisease():
             'precipitation' : weather_list[0]['precipitation']
             }], 
         "image_url": url_list[0], 
-        'dbmemo' : ''
+        'dbmemo' : '',
+        }, 
+        {
+        "category": kind_list[0][0], 
+        "kind": 'bug', 
+        "date": date_list[0][0],
+        "datetime": time_list, 
+        "weather": [{
+            'state' : weather_list[0]['state'], 
+            'temperature' : weather_list[0]['temperature'], 
+            'precipitation' : weather_list[0]['precipitation']
+            }], 
+        "image_url": url_list[0], 
+        'dbmemo' : '',
         }]
     f = open('database.csv', 'r', encoding="utf-8")
     rd = csv.reader(f)
     for line in rd:
-        if line[0] == date_list[0][0]:  # db에 해당 날씨 정보가 있을 때 일지 추가
+        if line[0] == response[0]['date'] and line[3] == response[0]['kind']:  # db에 해당 날씨 정보가 있을 때 일지 추가
             response[0]['dbmemo'] = line[-1]
-        else: continue
+        if line[0] == response[1]['date'] and line[3] == response[1]['kind']:
+            response[1]['dbmemo'] = line[-1]
     f.close()
-
     return {
         "diseases": response
     }
@@ -104,7 +118,7 @@ async def postMemo(memo: memo):
     temp = []
     flag = True
     for line in rd:
-        if memo.date == line[0]:
+        if memo.bug == line[3] and memo.date == line[0]:
             line[-1] = memo.memo
             flag = False
         temp.append(line)
