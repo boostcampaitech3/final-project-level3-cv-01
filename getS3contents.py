@@ -108,7 +108,10 @@ def get_standard_data():
     Disease_time_list = [{'datetime' : date[1], 'image_url' : url} for date, url in zip(Disease_date_list, Disease_url_list)]
 
     responese = []
-    for category, kind in Disease_kind_list:
+    for idx, value in enumerate(Disease_kind_list):
+        category, kind = value[0], value[1]
+        if idx >= 1 and Disease_kind_list[idx] == Disease_kind_list[idx-1]:
+            continue
         responese.append({
                 "category": category, 
                 "kind": kind, 
@@ -118,12 +121,15 @@ def get_standard_data():
                     'state' : weather_list[0]['state'], 
                     'temperature' : weather_list[0]['temperature'], 
                     'precipitation' : weather_list[0]['precipitation']
-                    }], 
+                    }],  
                 "image_url": Disease_url_list[0], 
                 'dbmemo' : ''
                 })
 
-    for category, kind in Bug_kind_list:
+    for idx, value in enumerate(Bug_kind_list):
+        category, kind = value[0], value[1]
+        if idx >= 1 and Bug_kind_list[idx] == Bug_kind_list[idx-1]:
+            continue
         responese.append({
                 "category": category, 
                 "kind": kind, 
