@@ -12,6 +12,7 @@ import weather
 from S3_file_management import *
 from getS3contents import *
 from cls_kind import *
+
 app = FastAPI()
 
 origins = [
@@ -50,6 +51,15 @@ async def login(user: user):
 
 
 response = get_standard_data()
+f = open('database.csv', 'r', encoding="utf-8")
+rd = csv.reader(f)
+for line in rd:
+    print(line[0], response[0]['date'], response[1]['date'], line[3], response[0]['kind'], response[1]['kind'])
+    if line[0] == response[0]['date'] and line[3] == response[0]['kind']:  # db에 해당 날씨 정보가 있을 때 일지 추가
+        response[0]['dbmemo'] = line[-1]
+    if line[0] == response[1]['date'] and line[3] == response[1]['kind']:
+        response[1]['dbmemo'] = line[-1]
+f.close()
 
 @app.post('/api/v1/postDisease')
 async def postDisease():
@@ -74,7 +84,7 @@ async def postMemo(memo: memo):
     temp = []
     flag = True
     for line in rd:
-        if memo.date == line[0]:
+        if memo.bug == line[3] and memo.date == line[0]:
             line[-1] = memo.memo
             flag = False
         temp.append(line)
