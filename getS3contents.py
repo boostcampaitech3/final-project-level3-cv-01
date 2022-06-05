@@ -107,9 +107,9 @@ def get_standard_data():
     Bug_time_list = [{'datetime' : date[1], 'image_url' : url} for date, url in zip(Bug_date_list, Bug_url_list)]
     Disease_time_list = [{'datetime' : date[1], 'image_url' : url} for date, url in zip(Disease_date_list, Disease_url_list)]
 
-    responese = []
+    response = []
     for category, kind in Disease_kind_list:
-        responese.append({
+        response.append({
                 "category": category, 
                 "kind": kind, 
                 "date": Disease_date_list[0][0],
@@ -124,7 +124,7 @@ def get_standard_data():
                 })
 
     for category, kind in Bug_kind_list:
-        responese.append({
+        response.append({
                 "category": category, 
                 "kind": kind, 
                 "date": Bug_date_list[0][0],
@@ -137,6 +137,6 @@ def get_standard_data():
                 "image_url": Bug_url_list[0], 
                 'dbmemo' : ''
                 })
-    return responese
+    return response
 
 
