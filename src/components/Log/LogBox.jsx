@@ -126,7 +126,7 @@ function LogBox(prop) {
             }}>삭제</Button>
         </ButtonGroup>
     );
-    if (categoryType === 'bug') {
+    if (categoryType === 'Bug') {
         return (
             <ThemeProvider theme={theme}>
                 <Box sx={{borderColor: 'button_color.gray', borderStyle: 'solid', borderWidth: 4, marginTop: 2}}>
