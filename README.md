@@ -176,4 +176,3 @@ ___
 | CascadeRCNN | Resnext101 | 0.8712 |
 
 **최종 모델 : CascadeRCNN + Resnext101**
-
