@@ -120,7 +120,6 @@ venv.bak/
 *.pkl
 *.pkl.json
 *.log.json
-/work_dirs
 /mmcls/.mim
 .DS_Store
 

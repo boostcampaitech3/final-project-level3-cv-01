@@ -9,7 +9,7 @@ import mmcv
 import numpy as np
 from torch.utils.data import Dataset
 
-from mmcls.core.evaluation import precision_recall_f1, support
+from mmcls.core.evaluation import precision_recall_f1, support, calculate_confusion_matrix,mAP
 from mmcls.models.losses import accuracy
 from .pipelines import Compose
 
@@ -146,13 +146,13 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
             dict: evaluation results
         """
         if metric_options is None:
-            metric_options = {'topk': (1, 5)}
+            metric_options = {'topk': (1, 3)}
         if isinstance(metric, str):
             metrics = [metric]
         else:
             metrics = metric
         allowed_metrics = [
-            'accuracy', 'precision', 'recall', 'f1_score', 'support'
+            'accuracy', 'precision', 'recall', 'f1_score', 'support','calculate_confusion_matrix','mAP'
         ]
         eval_results = {}
         results = np.vstack(results)
@@ -167,7 +167,8 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         if len(invalid_metrics) != 0:
             raise ValueError(f'metric {invalid_metrics} is not supported.')
 
-        topk = metric_options.get('topk', (1, 5))
+        topk = metric_options.get('topk', (1, 3))
+        topk = (1,3)
         thrs = metric_options.get('thrs')
         average_mode = metric_options.get('average_mode', 'macro')
 
@@ -198,6 +199,13 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
             support_value = support(
                 results, gt_labels, average_mode=average_mode)
             eval_results['support'] = support_value
+
+        if 'mAP' in metrics:
+            result_mAP,ap = mAP(results,gt_labels)
+            print(ap)
+            eval_results['mAP'] = result_mAP
+            
+            
 
         precision_recall_f1_keys = ['precision', 'recall', 'f1_score']
         if len(set(metrics) & set(precision_recall_f1_keys)) != 0:
