@@ -53,4 +53,4 @@ uvicorn main:app --reload --host={your_host} --port={your_port}
 
 ### 데모 영상
 
-![image-20220607171331312](https://raw.githubusercontent.com/variety82/imgForTypora/forUpload/img/image-20220607171331312.png)
+![시연영상](https://raw.githubusercontent.com/variety82/imgForTypora/forUpload/img/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81.gif)
