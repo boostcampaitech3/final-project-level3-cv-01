@@ -23,35 +23,23 @@
 
 # Prerequisite
 
-
-
-```markdown
-
-
 - react v18.1.0
 - Node.js v16.15.0
 - npm v8.5.5
 - npx v8.5.5
 - Package : package.json 참고
-```
 
 # Usage
-
-
-
-~~~markdown
-## Usage
-### git clone
+## git clone
 ```
 npm init # npm 초기화
 git clone https://github.com/boostcampaitech3/final-project-level3-cv-01.git
 ```
-### react start
+## react start
 ```
 cd app # 폴더 진입
 npm install npm start
 ```
-~~~
 
 
 
@@ -59,8 +47,7 @@ npm install npm start
 
 
 
-```markdown
-## Directory
+```bash
 app
 ├── public
 │   ├── index.html
@@ -95,8 +82,6 @@ app
 
 ![시연영상](https://raw.githubusercontent.com/variety82/imgForTypora/forUpload/img/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81.gif)
 
-
-# Appendix
 
 
 ### Product Flow
