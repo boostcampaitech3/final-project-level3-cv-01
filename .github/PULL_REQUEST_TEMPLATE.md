@@ -10,7 +10,7 @@
 ## 기타
 작업한 다음에 처리할 내용 등
 
-resolved : 
+closed : 
 작업 issue 번호 트래킹
 
 ref :
