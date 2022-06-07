@@ -30,7 +30,7 @@ pip install -v -e
 ## :file_folder: Checkpoint Download
 
 
-1. [배추 Detection pth]()
+1. [배추 Detection pth](https://drive.google.com/file/d/1I50u2QwuEDl7U2lL5DaIBYNFNqKFLQMN/view?usp=sharing)
 2. [해충 Detection pth](https://drive.google.com/file/d/1vVC38mZDHUqYGZEhVeYePIpCbWcwn3Rl/view?usp=sharing)
 3. [질병 Classification pth](https://drive.google.com/file/d/1tRxeN1ahd5aGez7EDBYGYN3QykBbXMgy/view?usp=sharing)
 
@@ -44,6 +44,15 @@ pip install -v -e
 
 ### 배추 Detection Model
 ```bash
+#pth file 다운 및 mywork/_base_/datasets/coco_detection.py 에서 test_pipeline 수정필요
+
+cd mmdetection
+
+#bug_inference.py before bug detection
+python utils/bug_inference.py 
+
+#disease_inference.py before disease classification
+python utils/disease_inference.py 
 ```
 
 
