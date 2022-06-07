@@ -46,8 +46,6 @@ pip install -v -e
 ```bash
 #pth file 다운 및 mywork/_base_/datasets/coco_detection.py 에서 test_pipeline 수정필요
 
-cd mmdetection
-
 #bug_inference.py before bug detection
 python utils/bug_inference.py 
 
