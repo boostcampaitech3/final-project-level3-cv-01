@@ -99,11 +99,7 @@ def get_standard_data():
     Bug_date_list = [get_image_date(data) for data in Bug_data_list]
     Disease_date_list = [get_image_date(data) for data in Disease_data_list]
 
-<<<<<<< HEAD
     weather_list = [today_weather(date[0], date[1], 60, 120) for date in Disease_date_list]
-=======
-    weather_list = [weather.today_weather(date[0], date[1], 60, 120) for date in Disease_date_list]
->>>>>>> b3523bd74aa360e78558887a8eca4d7449cab002
 
     Bug_url_list = [get_image_url(data) for data in Bug_data_list]
     Disease_url_list = [get_image_url(data) for data in Disease_data_list]
