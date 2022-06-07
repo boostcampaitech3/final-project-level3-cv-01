@@ -8,10 +8,10 @@ from pydantic import BaseModel
 from typing import List
 import os
 import datetime
-import weather
-from S3_file_management import *
-from getS3contents import *
-from cls_kind import *
+from utills.weather import *
+from utills.S3_file_management import *
+from utills.getS3contents import *
+from utills.cls_kind import *
 
 app = FastAPI()
 
@@ -71,7 +71,7 @@ async def postDisease():
 async def postWeather():
     current_time = str(datetime.datetime.now()).split()
     date, time = current_time[0], current_time[1][:5]
-    current_tw = weather.today_weather(date, time, 60, 120)
+    current_tw = today_weather(date, time, 60, 120)
     response = {'date' : current_tw['date'], 'temperature': current_tw['temperature'], 'state': current_tw['state'], 'precipitation': current_tw['precipitation']}
     return {
         "weather": response

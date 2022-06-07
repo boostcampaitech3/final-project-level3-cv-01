@@ -1,4 +1,4 @@
-from getS3contents import *
+from .getS3contents import *
 
 def get_cls_kind(data):
     data = data.split('_')
