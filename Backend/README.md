@@ -39,7 +39,7 @@ Backend/
 git clone https://github.com/boostcampaitech3/final-project-level3-cv-01.git
 ```
 
-## Prerequisite
+### Prerequisite
 
 ```
 $ pip install -r requirements.txt
