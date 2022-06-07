@@ -32,6 +32,13 @@ Backend/
 - `S3_file_management.py` : 연결된 S3 Bucket에 이미지를 업로드, 다운로드하는 Component
 - `weather.py` : 기상청 API를 사용해 입력한 시간의 날씨를 크롤링해오는 Component
 
+
+### Git Clone
+
+```
+git clone https://github.com/boostcampaitech3/final-project-level3-cv-01.git
+```
+
 ## Prerequisite
 
 ```
