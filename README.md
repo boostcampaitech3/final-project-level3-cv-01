@@ -38,7 +38,8 @@ git clone https://github.com/boostcampaitech3/final-project-level3-cv-01.git
 ## react start
 ```
 cd app # 폴더 진입
-npm install npm start
+npm install 
+npm start
 ```
 
 
