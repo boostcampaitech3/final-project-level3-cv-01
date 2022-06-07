@@ -71,7 +71,11 @@ async def postDisease():
 async def postWeather():
     current_time = str(datetime.datetime.now()).split()
     date, time = current_time[0], current_time[1][:5]
+<<<<<<< HEAD
     current_tw = today_weather(date, time, 60, 120)
+=======
+    current_tw = weather.today_weather(date, time, 60, 120)
+>>>>>>> b3523bd74aa360e78558887a8eca4d7449cab002
     response = {'date' : current_tw['date'], 'temperature': current_tw['temperature'], 'state': current_tw['state'], 'precipitation': current_tw['precipitation']}
     return {
         "weather": response
