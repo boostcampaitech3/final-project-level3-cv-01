@@ -1,14 +1,5 @@
 ## SmartfarmTV
 
-### 등장 배경  OR Why?
-
-한국에서 배추는 1인당 연간 소비량이 47.5kg에 달할정도로 소비가 많은 작물입니다. 그러나 매년 병충해 피해로 생산량이 감소하고 가격이 오르는 등 농가와 소비자에게 큰 피해가 있는 상황입니다.
-
-따라서, 저희는 Computer Vision 기술을 활용해 실시간으로 농작물을 관찰하여 해충 및 질병피해가 발견된 경우 사용자에게 알려주어 농가의 피해감소, 노동력 절감 및 농가 경제 경쟁력을 향상시킬 수 있는 시스템을 개발하고자 하였습니다.
-
-### 문제 정의
-
-농작물에서 병해충을 Detection 해주는 모델을 사용해서, 농작물을 관찰하다 해충 및 질병피해가 발견된 경우 사용자에게 알려주어 사용자가 조치를 취할 수 있도록 도와준다.
 
 ### **Product Flow**
 
@@ -21,14 +12,16 @@
 ### Directory
 
 ```
-app
+Backend/
 ├── main.py
 ├── requirements.txt
-├── S3_file_management.py
-├── cls_kind.py
 ├── database.csv
-├── getS3contents.py
-└── weather.py
+└── utils
+	 ├── S3_file_management.py
+	 ├── cls_kind.py
+	 ├── database.csv
+	 ├── getS3contents.py
+	 └── weather.py
 ```
 
 ### Files
