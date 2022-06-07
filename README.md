@@ -53,11 +53,7 @@ npm install npm start
 ```
 ~~~
 
-# License
 
-
-
-- 멘토님께 문의
 
 # Directory 구조
 
@@ -99,11 +95,6 @@ app
 
 ![시연영상](https://raw.githubusercontent.com/variety82/imgForTypora/forUpload/img/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81.gif)
 
-# Reference
-
-
-
-https://mmsegmentation.readthedocs.io/en/latest/tutorials/customize_datasets.html
 
 # Appendix
 
