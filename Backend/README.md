@@ -41,7 +41,6 @@ Backend/
 └── utils
 	 ├── S3_file_management.py
 	 ├── cls_kind.py
-	 ├── database.csv
 	 ├── getS3contents.py
 	 └── weather.py
 ```
