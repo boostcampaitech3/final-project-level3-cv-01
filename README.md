@@ -75,7 +75,7 @@ app
 │   │    ├── Login
 │   │    │    └── Login.jsx
 │   │    └── Navigator
-│   │    	   └── Navigator.jsx
+│   │       └── Navigator.jsx
 │   ├── App.js
 │   ├── index.css
 │   └── index.js
