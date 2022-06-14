@@ -57,7 +57,7 @@ crontab -e
 ```bash
 #mywork/_base_/datasets/coco_detection.py 에서 train_pipeline 수정필요
 cd mmdetection
-python tools/train.py configs/../mywork/cascade_rcnn/swin_cascade_rcnn_x101_64x4d_fpn_20e_coco.py
+python tools/train.py mywork/cascade_rcnn/swin_cascade_rcnn_x101_64x4d_fpn_20e_coco.py
 ```
 
 
