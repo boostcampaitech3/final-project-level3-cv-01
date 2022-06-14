@@ -55,7 +55,9 @@ crontab -e
 
 ### 배추 Detection Model
 ```bash
-
+#mywork/_base_/datasets/coco_detection.py 에서 train_pipeline 수정필요
+cd mmdetection
+python tools/train.py configs/../mywork/cascade_rcnn/swin_cascade_rcnn_x101_64x4d_fpn_20e_coco.py
 ```
 
 
@@ -85,10 +87,8 @@ python tools/train.py configs/1.MyConfig/resnext/my_resnext152-32x4d_8xb32_in1k.
 ### 배추 Detection Model
 ```bash
 #pth file 다운 및 mywork/_base_/datasets/coco_detection.py 에서 test_pipeline 수정필요
-#bug_inference.py before bug detection
-python utils/bug_inference.py 
-#disease_inference.py before disease classification
-python utils/disease_inference.py 
+cd mmdetection
+python tools/cabbage_detection.py {img path} {config file path} {checkpoint pth path} {save dir path}
 ```
 
 

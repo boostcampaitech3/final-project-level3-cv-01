@@ -1,44 +1,28 @@
-
-
-# 전처리를 위한 라이브러리
-from pycocotools.coco import COCO
-import torchvision
-import torchvision.transforms as transforms
-from PIL import Image
-#!pip install albumentations==0.4.6
-import albumentations as A
-from albumentations.pytorch import ToTensorV2
-import matplotlib.pyplot as plt
-
-# 시각화를 위한 라이브러리
 import matplotlib.pyplot as plt
 import seaborn as sns; sns.set()
-from matplotlib.patches import Patch
 import numpy as np
-import json 
 import cv2
-#!pip install webcolors
-import webcolors
-
+import argparse
 plt.rcParams['axes.grid'] = False
-
 from mmdet.apis import init_detector, inference_detector
 
-config_file = '/opt/ml/input/Project/mmdetection/mywork/cascade_rcnn/swin_cascade_rcnn_x101_64x4d_fpn_20e_coco.py'
-checkpoint_file = '/opt/ml/input/Project/mmdetection/work_dirs/swin_cascade_rcnn_x101_64x4d_fpn_20e_coco/over8.pth'
-model = init_detector(config_file,checkpoint_file,device='cuda:0')
 
-img = cv2.imread("/opt/ml/input/Project/data/Detection/Test/image/mixed_real_test.png")
+parser = argparse.ArgumentParser()
+parser.add_argument('img',help='inference image path')
+parser.add_argument('config',help='inference config file path')
+parser.add_argument('checkpoint',help='checkpoint file path')
+parser.add_argument('save_dir',help='save result directory path')
+args = parser.parse_args()
 
+
+model = init_detector(args.config,args.checkpoint,device='cuda:0')
+
+img = cv2.imread(args.img)
 img_arr = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 
-
-
-
-# 0부터 순차적으로 클래스 매핑된 label 적용. 
 labels_to_names_seq = {0:'Cabbage' }
-
 labels_to_names = {0:'Cabbage' }
+
 bbox_list = []
 # model과 원본 이미지 array, filtering할 기준 class confidence score를 인자로 가지는 inference 시각화용 함수 생성. 
 def get_detected_img(model, img_array,  score_threshold=0.3, is_print=True):
@@ -89,10 +73,7 @@ def get_detected_img(model, img_array,  score_threshold=0.3, is_print=True):
 
 img_arr = img
 detected_img = get_detected_img(model, img_arr,  score_threshold=0.3, is_print=True)
-# detect 입력된 이미지는 bgr임. 이를 최종 출력시 rgb로 변환 
 detected_img = cv2.cvtColor(detected_img, cv2.COLOR_BGR2RGB)
-
-
 
 def im_trim(img, x, y, w, h):
     imgtrim = img[y: y + h, x: x + w]
@@ -101,11 +82,9 @@ def im_trim(img, x, y, w, h):
 id = 1
 for box in bbox_list:
   croppedImage = im_trim(img,box["left"],box["top"],abs(box["top"]-box["bottom"]),abs(box["right"]-box["left"]))
-  fn = "/opt/ml/input/Project/data/Bug_detection/image/bug_cropped_"+str(id)+".png"
+  fn = args.save_dir + "/cropped_"+str(id)+".png"
   cv2.imwrite(fn, croppedImage)
-  print(id)
   id +=1
-
 
 print("finish")
 
