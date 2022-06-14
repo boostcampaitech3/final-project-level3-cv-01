@@ -1,5 +1,69 @@
 # 👩‍🌾SmartfarmTV👨‍🌾
 
+### Team Members
+
+<div align="left">
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/variety82/">
+          <img src="https://avatars.githubusercontent.com/u/78781975?v=4" alt="김창현 프로필" width=120 height=120 />
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/parkgr95">
+          <img src="https://avatars.githubusercontent.com/u/62732145?v=4" alt="박기련 프로필" width=120 height=120 />
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/kkt4828/">
+          <img src="https://avatars.githubusercontent.com/u/67678760?v=4" alt="김기태 프로필" width=120 height=120 />
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/mata1139">
+          <img src="https://avatars.githubusercontent.com/u/70196880?v=4" alt="박민수 프로필" width=120 height=120 />
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/Somang-Kang">
+          <img src="https://avatars.githubusercontent.com/u/77764316?v=4" alt="강소망 프로필" width=120 height=120 />
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/variety82/">
+          김창현
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/parkgr95">
+          박기련
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/kkt4828/">
+          김기태
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/mata1139">
+          박민수
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/Somang-Kang">
+          강소망
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<br/>
+<div id="5"></div>
+
 
 
 ### 등장 배경
@@ -66,7 +130,7 @@ app
 │   │    ├── Login
 │   │    │    └── Login.jsx
 │   │    └── Navigator
-│   │    │    └── Navigator.jsx
+│   │         └── Navigator.jsx
 │   ├── App.js
 │   ├── index.css
 │   └── index.js
@@ -101,7 +165,13 @@ ___
 
 ### **AIHub 개방 데이터셋**
 
-![image-20220607185039043](https://raw.githubusercontent.com/variety82/imgForTypora/forUpload/img/image-20220607185039043.png)
+<a href="https://aihub.or.kr/aidata/30731" height="5" width="10" target="_blank">
+	<img src="https://user-images.githubusercontent.com/77764316/173332461-622eaa1b-e507-42af-a403-1bed8b9c0531.png" height="150" width="400">
+</a>
+<a href="https://aihub.or.kr/aidata/30730" height="5" width="10" target="_blank">
+	<img src="https://user-images.githubusercontent.com/77764316/173331374-4c3b5129-b4ea-47da-a8dd-bb51ae2cfd62.png" height="150" width="400">
+</a>
+
 
 ### 1. 노지 작물 질병 진단 이미지
 
@@ -123,15 +193,12 @@ ___
 
 # Model Pipeline
 
-
-
-![image-20220607185059077](https://raw.githubusercontent.com/variety82/imgForTypora/forUpload/img/image-20220607185059077.png)
+<img width="624" src="https://user-images.githubusercontent.com/77764316/173336614-154fff67-5371-4cc5-ab18-293bfbd2bd0c.png">
 
 # Experiments
 
+<img width="797"  src="https://user-images.githubusercontent.com/77764316/173336861-88c97151-4eb5-4d04-b7d5-44e73e1f3b2d.png">
 
-
-![image-20220607185115207](https://raw.githubusercontent.com/variety82/imgForTypora/forUpload/img/image-20220607185115207.png)
 
 ### ↘️ **배추 Detection**
 
@@ -175,5 +242,6 @@ ___
 | Model       | Backbone   | mAP50  |
 | ----------- | ---------- | ------ |
 | CascadeRCNN | Resnext101 | 0.8712 |
+| CascadeRCNN | Resnet101  | 0.8350 |
 
 **최종 모델 : CascadeRCNN + Resnext101**
