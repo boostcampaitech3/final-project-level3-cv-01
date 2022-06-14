@@ -2,13 +2,68 @@
 
 ### Team Members
 
-| 이름 | 역할 | Github |
-| --- | --- | --- |
-| 김기태 | Front-end | https://github.com/kkt4828/ |
-| 김창현 | Back-end | https://github.com/variety82/ |
-| 박기련 | Back-end | https://github.com/parkgr95 |
-| 강소망 | Model | https://github.com/Somang-Kang |
-| 박민수 | Model | https://github.com/mata1139 |
+<div align="left">
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/variety82/">
+          <img src="https://avatars.githubusercontent.com/u/78781975?v=4" alt="김창현 프로필" width=120 height=120 />
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/parkgr95">
+          <img src="https://avatars.githubusercontent.com/u/62732145?v=4" alt="박기련 프로필" width=120 height=120 />
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/kkt4828/">
+          <img src="https://avatars.githubusercontent.com/u/67678760?v=4" alt="김기태 프로필" width=120 height=120 />
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/mata1139">
+          <img src="https://avatars.githubusercontent.com/u/70196880?v=4" alt="박민수 프로필" width=120 height=120 />
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/Somang-Kang">
+          <img src="https://avatars.githubusercontent.com/u/77764316?v=4" alt="강소망 프로필" width=120 height=120 />
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/variety82/">
+          김창현
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/parkgr95">
+          박기련
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/kkt4828/">
+          김기태
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/mata1139">
+          박민수
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/Somang-Kang">
+          강소망
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<br/>
+<div id="5"></div>
+
 
 
 ### 등장 배경
