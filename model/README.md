@@ -3,7 +3,6 @@
 ### Git Clone
 ```bash
 #Pytorch 설치 필요
-
 git clone https://github.com/boostcampaitech3/final-project-level3-cv-01.git
 cd model
 ```
@@ -23,6 +22,19 @@ pip install -v -e
 cd mmclassification
 pip install -v -e 
 ```
+
+### 3. Crontab 을 이용한 Batch Inference 설정
+```bash
+crontab -e
+
+# Crontab 에 아래 내용 추가 후 저장 (경로설정 필수)
+* * * * * python {crontab_classification.py path} {img path} {checkpoint pth path}
+
+* * * * * python {crontab_bug_detection.py path} {img path} {checkpoint pth path}
+
+#:wq 로 저장
+```
+
 <br>
 <br>
 
@@ -34,30 +46,55 @@ pip install -v -e
 2. [해충 Detection pth](https://drive.google.com/file/d/1vVC38mZDHUqYGZEhVeYePIpCbWcwn3Rl/view?usp=sharing)
 3. [질병 Classification pth](https://drive.google.com/file/d/1tRxeN1ahd5aGez7EDBYGYN3QykBbXMgy/view?usp=sharing)
 
+<br>
+<br>
 
+
+## :notebook: Train Usage
+
+### 배추 Detection Model
+```bash
+#mywork/_base_/datasets/coco_detection.py 에서 train_pipeline 수정필요
+cd mmdetection
+python tools/train.py mywork/cascade_rcnn/swin_cascade_rcnn_x101_64x4d_fpn_20e_coco.py
+```
+
+
+### 해충 Detection Model
+```bash
+#config/1.MyConfig/datasets/custom.py 에서 train_pipeline 수정필요
+cd mmdetection
+python tools/train.py configs/cascade_rcnn/cascade_rcnn_x101_64x4d_fpn_1x_coco.py
+
+```
+
+### 질병 Classification Model
+```bash
+#config/1.MyConfig/datasets/custom.py 에서 train_pipeline 수정필요 
+cd mmclassification 
+python tools/train.py configs/1.MyConfig/resnext/my_resnext152-32x4d_8xb32_in1k.py
+
+```
 
 
 <br>
 <br>
+
+
 
 ## :notebook: Inference Usage
 
 ### 배추 Detection Model
 ```bash
 #pth file 다운 및 mywork/_base_/datasets/coco_detection.py 에서 test_pipeline 수정필요
-
-#bug_inference.py before bug detection
-python utils/bug_inference.py 
-
-#disease_inference.py before disease classification
-python utils/disease_inference.py 
+cd mmdetection
+python tools/cabbage_detection.py {img path} {config file path} {checkpoint pth path} {save dir path}
 ```
 
 
 ### 해충 Detection Model
 ```bash
 #pth file 다운 및 config/1.MyConfig/datasets/custom.py 에서 test_pipeline 수정필요
-
 cd mmdetection
 python tools/test.py configs/cascade_rcnn/cascade_rcnn_x101_64x4d_fpn_1x_coco.py \
 {pth_path} --options "jsonfile_prefix={output filename}"
@@ -66,8 +103,8 @@ python tools/test.py configs/cascade_rcnn/cascade_rcnn_x101_64x4d_fpn_1x_coco.py
 ### 질병 Classification Model
 ```bash
 #pth file 다운 및 config/1.MyConfig/datasets/custom.py 에서 test_pipeline 수정필요 
-
 cd mmclassification
 python tools/test.py configs/1.MyConfig/resnext/my_resnext152-32x4d_8xb32_in1k.py \
 {pth_path} --out {output filename} --out-itmes all
 ```
+
