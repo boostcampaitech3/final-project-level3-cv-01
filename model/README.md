@@ -18,6 +18,7 @@ pip install -v -e
 ### 2. MMClassfication
 ```bash
 #"1" 의 openmim, mmcv-full 설치필요
+
 cd mmclassification
 pip install -v -e 
 ```
@@ -27,7 +28,7 @@ pip install -v -e
 crontab -e
 
 # Crontab 에 아래 내용 추가 후 저장 (경로설정 필수)
-*/15 * * * * python {crontab_classification.py path} {img path} {checkpoint pth path}
+* * * * * python {crontab_classification.py path} {img path} {checkpoint pth path}
 
 * * * * * python {crontab_bug_detection.py path} {img path} {checkpoint pth path}
 
@@ -45,11 +46,9 @@ crontab -e
 2. [해충 Detection pth](https://drive.google.com/file/d/1vVC38mZDHUqYGZEhVeYePIpCbWcwn3Rl/view?usp=sharing)
 3. [질병 Classification pth](https://drive.google.com/file/d/1tRxeN1ahd5aGez7EDBYGYN3QykBbXMgy/view?usp=sharing)
 
-
-
-
 <br>
 <br>
+
 
 ## :notebook: Train Usage
 
@@ -82,6 +81,7 @@ python tools/train.py configs/1.MyConfig/resnext/my_resnext152-32x4d_8xb32_in1k.
 <br>
 
 
+
 ## :notebook: Inference Usage
 
 ### 배추 Detection Model
@@ -107,3 +107,4 @@ cd mmclassification
 python tools/test.py configs/1.MyConfig/resnext/my_resnext152-32x4d_8xb32_in1k.py \
 {pth_path} --out {output filename} --out-itmes all
 ```
+
